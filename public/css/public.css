@@ -1,0 +1,747 @@
+/**
+ * Frontend styles for JetPrayer
+ */
+
+:root {
+	--jp-theme-primary: #0ea5e9;
+	--jp-theme-primary-glow: rgba(14, 165, 233, 0.4);
+	--jp-theme-bg-glass: rgba(15, 23, 42, 0.75);
+	--jp-theme-border-glass: rgba(255, 255, 255, 0.08);
+	--jp-theme-text-light: #f8fafc;
+	--jp-theme-text-muted: #94a3b8;
+	--jp-theme-card-glow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+	--jp-theme-radius: 16px;
+
+	--jp-ticker-bg: var(--jp-theme-bg-glass);
+	--jp-ticker-border: var(--jp-theme-border-glass);
+	--jp-ticker-radius: 8px;
+	--jp-ticker-title-bg: var(--jp-theme-primary);
+	--jp-ticker-title-color: #ffffff;
+	--jp-ticker-text-color: #ffffff;
+
+	--jp-modal-box-bg: #1e293b;
+	--jp-modal-box-border: rgba(255, 255, 255, 0.1);
+	--jp-modal-box-radius: 16px;
+	--jp-modal-table-header-color: var(--jp-theme-text-muted);
+	--jp-modal-today-color: var(--jp-theme-primary);
+	--jp-modal-trigger-bg: var(--jp-theme-primary);
+	--jp-modal-trigger-color: #ffffff;
+}
+
+/* Per-layout customizable properties (Displays admin tab). Each layout scopes
+   its own copy of these generic variable names so Card/Grid/Slider can be
+   customized independently. Defaults below reproduce the original hardcoded
+   look; admin overrides are injected as scoped inline CSS (same selectors)
+   only after a layout's settings are explicitly saved. */
+.jp-card-layout {
+	--jp-layout-bg: var(--jp-theme-bg-glass);
+	--jp-layout-border: var(--jp-theme-border-glass);
+	--jp-layout-radius: var(--jp-theme-radius);
+	--jp-location-color: #ffffff;
+	--jp-hijri-color: var(--jp-theme-primary);
+	--jp-greg-color: var(--jp-theme-text-muted);
+	--jp-label-color: #ffffff;
+	--jp-time-color: #ffffff;
+	--jp-next-color: var(--jp-theme-primary);
+	--jp-name-bg: rgba(255, 255, 255, 0.03);
+	--jp-time-bg: rgba(255, 255, 255, 0.03);
+	--jp-layout-max-width: 380px;
+}
+
+.jp-grid-layout {
+	--jp-layout-bg: var(--jp-theme-bg-glass);
+	--jp-layout-border: var(--jp-theme-border-glass);
+	--jp-layout-radius: var(--jp-theme-radius);
+	--jp-location-color: #ffffff;
+	--jp-hijri-color: var(--jp-theme-primary);
+	--jp-label-color: var(--jp-theme-text-muted);
+	--jp-time-color: #ffffff;
+	--jp-next-color: var(--jp-theme-primary);
+	--jp-layout-max-width: 900px;
+}
+
+.jp-slider-layout {
+	--jp-layout-bg: var(--jp-theme-bg-glass);
+	--jp-layout-border: var(--jp-theme-border-glass);
+	--jp-layout-radius: var(--jp-theme-radius);
+	--jp-location-color: #ffffff;
+	--jp-label-color: var(--jp-theme-text-muted);
+	--jp-time-color: #ffffff;
+	--jp-next-color: var(--jp-theme-primary);
+	--jp-layout-max-width: 500px;
+}
+
+/* Card Container */
+.jp-container {
+	background: var(--jp-layout-bg) !important;
+	backdrop-filter: blur(12px) !important;
+	-webkit-backdrop-filter: blur(12px) !important;
+	border: 1px solid var(--jp-layout-border) !important;
+	border-radius: var(--jp-layout-radius) !important;
+	padding: 24px !important;
+	color: var(--jp-theme-text-light) !important;
+	box-shadow: var(--jp-theme-card-glow) !important;
+	font-family: system-ui, -apple-system, sans-serif !important;
+	width: 100% !important;
+	height: auto !important;
+	max-width: var(--jp-layout-max-width, 380px) !important;
+	margin: 0 auto;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	box-sizing: border-box;
+	display: flex !important;
+	flex-direction: column !important;
+}
+
+.jp-body {
+	flex: 1 1 auto !important;
+	display: flex !important;
+	flex-direction: column !important;
+	justify-content: center !important;
+}
+
+.jp-container:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 12px 40px 0 rgba(14, 165, 233, 0.2) !important;
+}
+
+.jp-header {
+	text-align: center;
+	border-bottom: 1px solid var(--jp-theme-border-glass);
+	padding-bottom: 16px;
+	margin-bottom: 20px;
+}
+
+.jp-title {
+	font-size: 20px;
+	font-weight: 700;
+	margin: 0 0 6px 0 !important;
+	color: var(--jp-location-color) !important;
+	letter-spacing: 0.5px;
+}
+
+.jp-hijri-date {
+	display: block;
+	font-size: 13px;
+	color: var(--jp-hijri-color);
+	font-weight: 600;
+	text-transform: uppercase;
+	margin-bottom: 4px;
+}
+
+.jp-greg-date {
+	font-size: 12px;
+	color: var(--jp-greg-color);
+}
+
+/* Prayer list inside Card */
+.jp-prayer-list {
+	list-style: none !important;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+.jp-prayer-item {
+	display: flex !important;
+	justify-content: space-between !important;
+	align-items: stretch !important;
+	background: transparent !important;
+	border: none !important;
+	padding: 0 !important;
+	margin-bottom: 8px !important;
+	box-shadow: none !important;
+	transition: all 0.2s ease;
+}
+
+.jp-prayer-item:last-child {
+	margin-bottom: 0 !important;
+}
+
+.jp-prayer-name {
+	flex: var(--jp-name-flex, 1 1 0%) !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: var(--jp-name-align, flex-start) !important;
+	gap: 8px !important;
+	font-weight: var(--jp-name-weight, 600) !important;
+	font-size: var(--jp-name-size, 14px) !important;
+	color: var(--jp-label-color) !important;
+	background: var(--jp-name-bg) !important;
+	padding: var(--jp-name-padding, 12px 16px) !important;
+	border-radius: var(--jp-name-radius, 8px) !important;
+	margin-right: var(--jp-name-margin, 4px) !important;
+	box-sizing: border-box !important;
+	transition: all 0.2s ease !important;
+	font-family: var(--jp-name-font, inherit) !important;
+}
+
+.jp-prayer-time {
+	flex: var(--jp-time-flex, 1 1 0%) !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: var(--jp-time-align, flex-end) !important;
+	font-size: var(--jp-time-size, 16px) !important;
+	font-weight: var(--jp-time-weight, 700) !important;
+	font-family: var(--jp-time-font, monospace) !important;
+	color: var(--jp-time-color) !important;
+	background: var(--jp-time-bg) !important;
+	padding: var(--jp-time-padding, 12px 16px) !important;
+	border-radius: var(--jp-time-radius, 8px) !important;
+	margin-left: var(--jp-time-margin, 4px) !important;
+	box-sizing: border-box !important;
+	text-align: right !important;
+	transition: all 0.2s ease !important;
+}
+
+.jp-prayer-item:hover .jp-prayer-name,
+.jp-prayer-item:hover .jp-prayer-time {
+	filter: brightness(1.25);
+}
+
+/* Next Prayer highlighting */
+.jp-grid-item.jp-next-prayer,
+.jp-slider-item.jp-next-prayer {
+	background: linear-gradient(135deg, rgba(14, 165, 233, 0.25) 0%, rgba(2, 132, 199, 0.1) 100%) !important;
+	border: 1px solid rgba(14, 165, 233, 0.4) !important;
+	box-shadow: 0 0 15px var(--jp-theme-primary-glow) !important;
+}
+
+.jp-prayer-item.jp-next-prayer .jp-prayer-name,
+.jp-prayer-item.jp-next-prayer .jp-prayer-time {
+	background: linear-gradient(135deg, rgba(14, 165, 233, 0.25) 0%, rgba(2, 132, 199, 0.1) 100%) !important;
+	border: 1px solid rgba(14, 165, 233, 0.4) !important;
+	box-shadow: 0 0 15px var(--jp-theme-primary-glow) !important;
+}
+
+.jp-next-badge {
+	background: var(--jp-next-color);
+	color: #ffffff;
+	font-size: 10px;
+	font-weight: 700;
+	text-transform: uppercase;
+	padding: 2px 6px;
+	border-radius: 4px;
+	animation: jp-pulse 2s infinite;
+}
+
+@keyframes jp-pulse {
+	0% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.7); }
+	70% { box-shadow: 0 0 0 6px rgba(14, 165, 233, 0); }
+	100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); }
+}
+
+/* Grid Layout */
+.jp-grid-layout {
+	max-width: 900px !important;
+}
+
+.jp-grid-body {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+	gap: 12px;
+	flex: 1 1 auto !important;
+}
+
+.jp-grid-item {
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid var(--jp-theme-border-glass);
+	border-radius: 12px;
+	padding: 16px 10px;
+	text-align: center;
+	position: relative;
+	transition: all 0.2s ease;
+	box-sizing: border-box;
+}
+
+.jp-grid-item:hover {
+	background: rgba(255, 255, 255, 0.06);
+	transform: translateY(-2px);
+}
+
+.jp-grid-label {
+	display: block;
+	font-size: var(--jp-name-size, 13px);
+	font-weight: var(--jp-name-weight, 600);
+	color: var(--jp-label-color);
+	margin-bottom: var(--jp-name-margin, 8px);
+	font-family: var(--jp-name-font, inherit);
+	text-align: var(--jp-name-align, center);
+}
+
+.jp-grid-time {
+	font-size: var(--jp-time-size, 18px);
+	font-weight: var(--jp-time-weight, 800);
+	display: block;
+	color: var(--jp-time-color);
+	font-family: var(--jp-time-font, inherit);
+	text-align: var(--jp-time-align, center);
+}
+
+.jp-next-indicator {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	width: 8px;
+	height: 8px;
+	background: var(--jp-next-color);
+	border-radius: 50%;
+	box-shadow: 0 0 8px var(--jp-next-color);
+}
+
+/* Slider Layout */
+.jp-slider-layout {
+	max-width: 500px !important;
+	position: relative;
+}
+
+.jp-slider-layout .jp-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid var(--jp-theme-border-glass);
+}
+
+.jp-slider-arrows {
+	display: flex;
+	gap: 8px;
+}
+
+.jp-slider-arrows button {
+	background: rgba(255, 255, 255, 0.08);
+	border: 1px solid var(--jp-theme-border-glass);
+	color: #ffffff;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	cursor: pointer;
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 0.2s;
+	padding: 0;
+	line-height: 1;
+}
+
+.jp-slider-arrows button:hover {
+	background: var(--jp-theme-primary);
+}
+
+.jp-slider-viewport {
+	overflow: hidden;
+	width: 100%;
+}
+
+.jp-slider-track {
+	display: flex;
+	gap: 15px;
+	transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.jp-slider-item {
+	flex: 0 0 130px;
+	max-width: 130px;
+	box-sizing: border-box;
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid var(--jp-theme-border-glass);
+	border-radius: 12px;
+	padding: 16px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	transition: all 0.2s ease;
+}
+
+.jp-slider-label {
+	font-size: var(--jp-name-size, 13px);
+	color: var(--jp-label-color);
+	font-weight: var(--jp-name-weight, 600);
+	font-family: var(--jp-name-font, inherit);
+	text-align: var(--jp-name-align, center);
+}
+
+.jp-slider-time {
+	font-size: var(--jp-time-size, 18px);
+	font-weight: var(--jp-time-weight, 800);
+	color: var(--jp-time-color);
+	font-family: var(--jp-time-font, inherit);
+	text-align: var(--jp-time-align, center);
+}
+
+.jp-slider-item .jp-next-badge {
+	align-self: center;
+	margin-top: 4px;
+}
+
+/* Ticker Layout */
+.jp-ticker-layout {
+	background: var(--jp-ticker-bg);
+	border: 1px solid var(--jp-ticker-border);
+	padding: 10px 20px;
+	color: var(--jp-ticker-text-color);
+	border-radius: var(--jp-ticker-radius);
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	overflow: hidden;
+	font-family: system-ui, -apple-system, sans-serif;
+	box-shadow: var(--jp-theme-card-glow);
+	box-sizing: border-box;
+	width: 100%;
+	margin: 0;
+}
+
+.jp-ticker-title {
+	font-weight: 700;
+	font-size: 13px;
+	background: var(--jp-ticker-title-bg);
+	color: var(--jp-ticker-title-color);
+	padding: 4px 10px;
+	border-radius: 4px;
+	white-space: nowrap;
+	text-transform: uppercase;
+}
+
+.jp-ticker-track-viewport {
+	overflow: hidden;
+	width: 100%;
+	position: relative;
+}
+
+.jp-ticker-track {
+	display: flex;
+	white-space: nowrap;
+}
+
+.jp-ticker-items {
+	display: inline-block;
+	padding-left: 100%;
+	animation: jp-ticker-anim 25s linear infinite;
+	font-family: monospace;
+	font-size: 14px;
+	font-weight: 600;
+	letter-spacing: 0.5px;
+}
+
+.jp-ticker-items:hover {
+	animation-play-state: paused;
+}
+
+@keyframes jp-ticker-anim {
+	0% { transform: translate3d(0, 0, 0); }
+	100% { transform: translate3d(-100%, 0, 0); }
+}
+
+/* Modal Trigger styling */
+.jp-modal-trigger-wrapper {
+	text-align: center;
+	margin: 15px 0 25px 0;
+}
+
+.jp-modal-open-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	border: none;
+	border-radius: 8px;
+	padding: 10px 20px;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	background: var(--jp-modal-trigger-bg);
+	color: var(--jp-modal-trigger-color);
+	box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+	transition: all 0.2s ease;
+}
+
+/* Modal overlay & popup box */
+.jp-modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(15, 23, 42, 0.7);
+	backdrop-filter: blur(8px);
+	z-index: 99999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 1;
+	transition: opacity 0.3s ease;
+}
+
+.jp-modal-overlay.hidden {
+	display: none !important;
+	opacity: 0;
+}
+
+.jp-modal-box {
+	background: var(--jp-modal-box-bg);
+	border: 1px solid var(--jp-modal-box-border);
+	border-radius: var(--jp-modal-box-radius);
+	width: 90%;
+	max-width: 650px;
+	max-height: 85vh;
+	box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.5);
+	color: #ffffff;
+	display: flex;
+	flex-direction: column;
+	animation: jp-modalSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+	box-sizing: border-box;
+}
+
+@keyframes jp-modalSlide {
+	from { transform: translateY(30px); opacity: 0; }
+	to { transform: translateY(0); opacity: 1; }
+}
+
+.jp-modal-header {
+	padding: 20px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.jp-modal-header h4 {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 700;
+	color: #ffffff;
+}
+
+.jp-modal-close {
+	background: none;
+	border: none;
+	color: #94a3b8;
+	font-size: 28px;
+	cursor: pointer;
+	line-height: 1;
+	padding: 0;
+	transition: color 0.15s;
+}
+
+.jp-modal-close:hover {
+	color: #ffffff;
+}
+
+.jp-modal-body {
+	padding: 20px;
+	overflow-y: auto;
+	flex: 1;
+}
+
+/* Modal monthly timetable table */
+.jp-modal-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 13px;
+}
+
+.jp-modal-table th {
+	text-align: left;
+	padding: 10px 8px;
+	border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+	color: var(--jp-modal-table-header-color);
+	font-weight: 600;
+}
+
+.jp-modal-table td {
+	padding: 10px 8px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.jp-modal-table tbody tr:hover {
+	background: rgba(255, 255, 255, 0.02);
+}
+
+/* Today's row highlighted in monthly modal */
+.jp-modal-table tr.jp-modal-today-row {
+	background: rgba(14, 165, 233, 0.15) !important;
+	border-left: 3px solid var(--jp-modal-today-color);
+}
+
+.jp-modal-table tr.jp-modal-today-row td {
+	color: #ffffff;
+	font-weight: 600;
+}
+
+.font-mono {
+	font-family: monospace !important;
+}
+
+.text-center {
+	text-align: center;
+}
+
+/* Alert notifications */
+.jetprayer-alert {
+	padding: 15px;
+	border-radius: 8px;
+	margin: 15px 0;
+	font-size: 14px;
+}
+
+.jetprayer-alert-warning {
+	background-color: #fef3c7;
+	color: #92400e;
+	border: 1px solid #fde68a;
+}
+
+/* City Switcher Dropdown Styles */
+.jp-switcher-container {
+	margin-bottom: 15px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.jp-city-switcher {
+	width: 100%;
+	max-width: 280px;
+	background: rgba(255, 255, 255, 0.07);
+	border: 1px solid var(--jp-theme-border-glass);
+	color: #ffffff;
+	padding: 8px 12px;
+	border-radius: 8px;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	outline: none;
+	transition: all 0.2s ease;
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+}
+
+.jp-city-switcher:hover, .jp-city-switcher:focus {
+	background: rgba(255, 255, 255, 0.12);
+	border-color: var(--jp-theme-primary);
+	box-shadow: 0 0 10px var(--jp-theme-primary-glow);
+}
+
+.jp-city-switcher option {
+	background: #1e293b;
+	color: #ffffff;
+}
+
+/* Premium Inline Switcher inside Header Titles (Card/Grid/Slider/Modal) */
+.jp-switcher-title-wrapper {
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	position: relative !important;
+	width: 100% !important;
+	max-width: 280px !important;
+	margin: 0 auto 6px auto !important;
+}
+
+.jp-switcher-title-wrapper .jp-switcher-container {
+	margin-bottom: 0 !important;
+	width: 100% !important;
+	display: inline-flex !important;
+}
+
+.jp-switcher-title-wrapper .jp-city-switcher {
+	appearance: none !important;
+	-webkit-appearance: none !important;
+	-moz-appearance: none !important;
+	background: transparent !important;
+	border: none !important;
+	border-bottom: 2px dashed rgba(255, 255, 255, 0.3) !important;
+	border-radius: 0 !important;
+	color: var(--jp-location-color) !important;
+	font-size: 20px !important;
+	font-weight: 700 !important;
+	text-align: center !important;
+	text-align-last: center !important;
+	padding: 4px 28px 4px 12px !important;
+	cursor: pointer !important;
+	outline: none !important;
+	transition: all 0.2s ease !important;
+	width: auto !important;
+	max-width: 100% !important;
+	display: inline-block !important;
+	box-shadow: none !important;
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
+	margin: 0 auto !important;
+}
+
+.jp-switcher-title-wrapper .jp-city-switcher:hover,
+.jp-switcher-title-wrapper .jp-city-switcher:focus {
+	border-bottom-color: var(--jp-theme-primary) !important;
+	color: var(--jp-theme-primary) !important;
+	background: transparent !important;
+	box-shadow: none !important;
+}
+
+.jp-switcher-title-wrapper::after {
+	content: "" !important;
+	position: absolute !important;
+	right: 12px !important;
+	top: 50% !important;
+	transform: translateY(-50%) !important;
+	width: 8px !important;
+	height: 5px !important;
+	background-color: var(--jp-theme-text-muted) !important;
+	clip-path: polygon(0 0, 100% 0, 50% 100%) !important;
+	pointer-events: none !important;
+	transition: background-color 0.2s ease !important;
+}
+
+.jp-switcher-title-wrapper:hover::after {
+	background-color: var(--jp-theme-primary) !important;
+}
+
+/* Ticker Switcher Integration */
+.jp-ticker-title.jp-switcher-title {
+	padding: 0 !important;
+	position: relative !important;
+	display: inline-flex !important;
+	align-items: center !important;
+}
+
+.jp-ticker-title.jp-switcher-title .jp-switcher-container {
+	margin-bottom: 0 !important;
+	width: auto !important;
+	display: inline-flex !important;
+}
+
+.jp-ticker-title.jp-switcher-title .jp-city-switcher {
+	appearance: none !important;
+	-webkit-appearance: none !important;
+	-moz-appearance: none !important;
+	background: var(--jp-ticker-title-bg) !important;
+	color: var(--jp-ticker-title-color) !important;
+	border: none !important;
+	font-size: 13px !important;
+	font-weight: 700 !important;
+	padding: 4px 24px 4px 10px !important;
+	border-radius: 4px !important;
+	cursor: pointer !important;
+	text-transform: uppercase !important;
+	width: auto !important;
+	display: inline-block !important;
+	outline: none !important;
+	box-shadow: none !important;
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
+}
+
+.jp-ticker-title.jp-switcher-title::after {
+	content: "" !important;
+	position: absolute !important;
+	right: 8px !important;
+	top: 50% !important;
+	transform: translateY(-50%) !important;
+	width: 8px !important;
+	height: 5px !important;
+	background-color: var(--jp-ticker-title-color) !important;
+	clip-path: polygon(0 0, 100% 0, 50% 100%) !important;
+	pointer-events: none !important;
+}
+
+.jp-next-badge.hidden, .jp-next-indicator.hidden, .hidden {
+	display: none !important;
+}

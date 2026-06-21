@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "jetprayer/prayer-times",
+	"version": "1.0.0",
+	"title": "JetPrayer Times",
+	"category": "widgets",
+	"icon": "clock",
+	"description": "Show Islamic prayer times with cached performance and responsive styles.",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"layout": {
+			"type": "string",
+			"default": "card"
+		},
+		"method": {
+			"type": "string",
+			"default": ""
+		},
+		"country": {
+			"type": "string",
+			"default": ""
+		},
+		"city": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"textdomain": "jetprayer",
+	"editorScript": "file:./index.js"
+}

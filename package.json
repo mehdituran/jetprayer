@@ -1,0 +1,20 @@
+{
+	"name": "jetprayer",
+	"version": "1.0.0",
+	"description": "JetPrayer - Islamic Prayer Times WordPress Plugin",
+	"author": "Mehdi Turan",
+	"license": "GPL-2.0-or-later",
+	"main": "build/index.js",
+	"scripts": {
+		"build": "wp-scripts build",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-css",
+		"lint:js": "wp-scripts lint-js",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip && zip -ur jetprayer.zip src/",
+		"start": "wp-scripts start"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^27.0.0"
+	}
+}

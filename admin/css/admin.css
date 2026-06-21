@@ -1,0 +1,1187 @@
+/**
+ * Admin stylesheet for JetPrayer
+ */
+
+:root {
+	--jp-bg-dark: #0f172a;
+	--jp-bg-card: #ffffff;
+	--jp-primary: #0284c7;
+	--jp-primary-hover: #0369a1;
+	--jp-text-dark: #0f172a;
+	--jp-text-light: #64748b;
+	--jp-accent: #0ea5e9;
+	--jp-success: #10b981;
+	--jp-warning: #f59e0b;
+	--jp-border: #e2e8f0;
+	--jp-radius: 12px;
+	--jp-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.jetprayer-admin-wrap {
+	margin: 20px 20px 0 0;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+	color: var(--jp-text-dark);
+}
+
+.jetprayer-admin-header {
+	background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+	padding: 30px;
+	border-radius: var(--jp-radius);
+	color: #ffffff;
+	margin-bottom: 25px;
+	box-shadow: var(--jp-shadow);
+}
+
+.jetprayer-logo {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.jetprayer-logo span.dashicons {
+	font-size: 32px;
+	width: 32px;
+	height: 32px;
+	color: #ffffff;
+}
+
+.jetprayer-logo h1 {
+	color: #ffffff;
+	font-size: 28px;
+	font-weight: 700;
+	margin: 0;
+	padding: 0;
+	line-height: 1;
+}
+
+.jetprayer-subtitle {
+	margin: 10px 0 0 0;
+	font-size: 15px;
+	opacity: 0.9;
+}
+
+/* Tabs */
+.jetprayer-tabs.nav-tab-wrapper {
+	border-bottom: 2px solid var(--jp-border);
+	padding-bottom: 0;
+	margin-bottom: 20px;
+	display: flex;
+	gap: 5px;
+}
+
+.jetprayer-tabs .nav-tab {
+	background: #f8fafc;
+	border: 1px solid var(--jp-border);
+	border-bottom: none;
+	border-radius: 8px 8px 0 0;
+	color: var(--jp-text-light);
+	font-weight: 600;
+	padding: 10px 20px;
+	font-size: 14px;
+	transition: all 0.2s ease;
+	margin: 0;
+}
+
+.jetprayer-tabs .nav-tab:hover {
+	background: #f1f5f9;
+	color: var(--jp-primary);
+}
+
+.jetprayer-tabs .nav-tab-active,
+.jetprayer-tabs .nav-tab-active:hover {
+	background: #ffffff;
+	border-color: var(--jp-border);
+	border-bottom: 2px solid #ffffff;
+	margin-bottom: -2px;
+	color: var(--jp-primary);
+}
+
+/* Tab Content Visibility */
+.jetprayer-tab-content {
+	display: none;
+}
+
+.jetprayer-tab-content.active {
+	display: block;
+}
+
+/* Cards & Grid Layout */
+.jetprayer-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
+}
+
+@media (max-width: 900px) {
+	.jetprayer-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+.jetprayer-card {
+	background: var(--jp-bg-card);
+	border: 1px solid var(--jp-border);
+	border-radius: var(--jp-radius);
+	padding: 25px;
+	box-shadow: var(--jp-shadow);
+	margin-bottom: 20px;
+}
+
+.jetprayer-card h2 {
+	font-size: 18px;
+	font-weight: 700;
+	margin: 0 0 20px 0;
+	padding-bottom: 10px;
+	border-bottom: 1px solid var(--jp-border);
+	color: var(--jp-text-dark);
+}
+
+/* Forms layout */
+.jp-form-group {
+	margin-bottom: 18px;
+}
+
+.jp-form-group label {
+	display: block !important;
+	float: none !important;
+	font-weight: 600;
+	margin-bottom: 8px;
+	font-size: 13px;
+	color: var(--jp-text-dark);
+}
+
+.jp-form-group input[type="text"],
+.jp-form-group input[type="number"],
+.jp-form-group select {
+	display: block !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	box-sizing: border-box !important;
+}
+
+.jp-form-row {
+	display: flex !important;
+	flex-wrap: wrap !important;
+	margin-left: -7.5px !important;
+	margin-right: -7.5px !important;
+}
+
+.jp-form-row .jp-form-group {
+	margin-bottom: 18px;
+}
+
+.jp-col-6 {
+	flex: 0 0 50% !important;
+	max-width: 50% !important;
+	padding: 0 7.5px !important;
+	box-sizing: border-box !important;
+}
+
+.jp-col-4 {
+	flex: 0 0 33.333% !important;
+	max-width: 33.333% !important;
+	padding: 0 7.5px !important;
+	box-sizing: border-box !important;
+}
+
+@media (max-width: 900px) {
+	.jp-col-4 {
+		flex: 0 0 50% !important;
+		max-width: 50% !important;
+	}
+}
+
+.hidden {
+	display: none !important;
+}
+
+/* Radio Group styling */
+.radio-group {
+	display: flex;
+	gap: 15px;
+}
+
+.radio-group label {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	cursor: pointer;
+	font-weight: normal;
+	font-size: 14px;
+}
+
+.radio-group input[type="radio"] {
+	margin: 0;
+}
+
+/* Form Inputs */
+.jetprayer-card input[type="text"],
+.jetprayer-card input[type="number"],
+.jetprayer-card select {
+	width: 100%;
+	padding: 8px 12px;
+	border: 1px solid var(--jp-border);
+	border-radius: 6px;
+	background-color: #f8fafc;
+	font-size: 14px;
+	color: var(--jp-text-dark);
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.jetprayer-card input[type="text"]:focus,
+.jetprayer-card input[type="number"]:focus,
+.jetprayer-card select:focus {
+	border-color: var(--jp-accent);
+	box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
+	outline: none;
+	background-color: #ffffff;
+}
+
+.jetprayer-btn {
+	background: var(--jp-primary) !important;
+	border-color: var(--jp-primary) !important;
+	color: #ffffff !important;
+	font-weight: 600 !important;
+	border-radius: 6px !important;
+	padding: 6px 18px !important;
+	height: auto !important;
+	line-height: 1.5 !important;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+	cursor: pointer;
+}
+
+.jp-btn-danger {
+	background: #dc2626 !important;
+	border-color: #dc2626 !important;
+	color: #ffffff !important;
+	font-weight: 600 !important;
+	border-radius: 6px !important;
+	padding: 6px 18px !important;
+	height: auto !important;
+	line-height: 1.5 !important;
+	box-shadow: 0 2px 4px rgba(220, 38, 38, 0.15) !important;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.jp-btn-danger:hover {
+	background: #b91c1c !important;
+	border-color: #b91c1c !important;
+}
+
+
+/* Sync status section */
+.sync-status {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 12px;
+	background: #f8fafc;
+	border-radius: 8px;
+	border: 1px solid var(--jp-border);
+	font-size: 14px;
+}
+
+.status-indicator {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+}
+
+.status-indicator.synced {
+	background-color: var(--jp-success);
+	box-shadow: 0 0 8px var(--jp-success);
+}
+
+.status-indicator.pending {
+	background-color: var(--jp-warning);
+	box-shadow: 0 0 8px var(--jp-warning);
+}
+
+.jetprayer-synced-methods {
+	margin-top: 12px;
+	font-size: 14px;
+}
+
+.jetprayer-synced-methods #jetprayer-synced-methods-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-top: 8px;
+}
+
+.jetprayer-method-badge {
+	display: inline-block;
+	font-size: 12px;
+	font-weight: 600;
+	padding: 4px 10px;
+	border-radius: 999px;
+	background: #eff6ff;
+	color: #1d4ed8;
+	border: 1px solid #bfdbfe;
+}
+
+.jetprayer-no-sync {
+	font-size: 13px;
+	font-style: italic;
+	color: #64748b;
+}
+
+.jetprayer-btn-sync {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	background: #ffffff !important;
+	border: 1px solid var(--jp-border) !important;
+	color: var(--jp-text-dark) !important;
+	padding: 8px 16px !important;
+	border-radius: 6px !important;
+	font-weight: 600 !important;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
+	height: auto !important;
+	line-height: 1.5 !important;
+}
+
+.jetprayer-btn-sync:hover {
+	background: #f8fafc !important;
+	border-color: #cbd5e1 !important;
+}
+
+.jetprayer-btn-sync span.dashicons {
+	margin-top: -1px;
+}
+
+.jetprayer-btn-sync.loading span.dashicons {
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	100% { transform: rotate(360deg); }
+}
+
+/* Sync Log Box */
+.jetprayer-log-box {
+	margin-top: 15px;
+	padding: 15px;
+	border-radius: 8px;
+	background: #0f172a;
+	color: #e2e8f0;
+	font-family: monospace;
+	max-height: 150px;
+	overflow-y: auto;
+	font-size: 13px;
+	border: 1px solid #1e293b;
+}
+
+.jetprayer-log-box p {
+	margin: 0 0 6px 0;
+}
+
+.jetprayer-log-box p:last-child {
+	margin: 0;
+}
+
+.jetprayer-log-box .success {
+	color: #4ade80;
+}
+
+.jetprayer-log-box .error {
+	color: #f87171;
+}
+
+.jetprayer-log-box .info {
+	color: #38bdf8;
+}
+
+/* Shortcode showcases */
+.shortcode-showcase-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	gap: 15px;
+	margin-top: 15px;
+}
+
+.shortcode-item {
+	background: #f8fafc;
+	border: 1px solid var(--jp-border);
+	padding: 12px;
+	border-radius: 8px;
+}
+
+.shortcode-item strong {
+	display: block;
+	font-size: 13px;
+	margin-bottom: 6px;
+}
+
+.shortcode-item code {
+	background: #e2e8f0;
+	color: var(--jp-primary-hover);
+	padding: 2px 6px;
+	border-radius: 4px;
+	font-size: 12px;
+}
+
+/* CRUD Timings Editor Table styling */
+.jp-editor-filters-wrap {
+	display: flex !important;
+	flex-wrap: wrap !important;
+	align-items: flex-end !important;
+	gap: 15px !important;
+	border-bottom: 1px solid var(--jp-border) !important;
+	padding-bottom: 20px !important;
+	margin-bottom: 20px !important;
+}
+
+.jp-editor-filter-group {
+	display: flex !important;
+	flex-direction: column !important;
+	flex: 1 1 140px !important;
+	min-width: 120px !important;
+}
+
+.jp-editor-filter-group.jp-editor-filter-method {
+	flex: 2 1 240px !important;
+	min-width: 180px !important;
+}
+
+.jp-editor-filter-group label {
+	font-weight: 600 !important;
+	font-size: 13px !important;
+	color: var(--jp-text-dark) !important;
+	margin-bottom: 8px !important;
+	float: none !important;
+	display: block !important;
+}
+
+.jp-editor-filter-group select {
+	width: 100% !important;
+	max-width: 100% !important;
+	box-sizing: border-box !important;
+	height: 38px !important;
+	padding: 0 30px 0 12px !important;
+	line-height: 36px !important;
+	font-size: 14px !important;
+}
+
+.jp-editor-filter-buttons {
+	display: flex !important;
+	gap: 10px !important;
+	align-items: center !important;
+	margin-bottom: 0 !important;
+}
+
+.jp-editor-filter-buttons button {
+	height: 38px !important;
+	padding: 0 18px !important;
+	font-size: 13px !important;
+	font-weight: 600 !important;
+	border-radius: 6px !important;
+	cursor: pointer !important;
+	box-sizing: border-box !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	line-height: 1 !important;
+}
+
+.jp-editor-filter-buttons .jetprayer-btn-secondary {
+	background: #ffffff !important;
+	border: 1px solid var(--jp-border) !important;
+	color: var(--jp-text-dark) !important;
+}
+
+.jp-editor-filter-buttons .jetprayer-btn-secondary:hover {
+	background: #f8fafc !important;
+	border-color: #cbd5e1 !important;
+}
+
+.jp-editor-filter-buttons .jetprayer-btn-primary {
+	background: var(--jp-primary) !important;
+	border: 1px solid var(--jp-primary) !important;
+	color: #ffffff !important;
+}
+
+.jp-editor-filter-buttons .jetprayer-btn-primary:hover {
+	background: var(--jp-primary-hover) !important;
+	border-color: var(--jp-primary-hover) !important;
+}
+
+.jetprayer-table-responsive {
+	overflow-x: auto;
+}
+
+.jetprayer-crud-table {
+	border: 1px solid var(--jp-border) !important;
+	box-shadow: none !important;
+	border-radius: var(--jp-radius);
+	overflow: hidden;
+}
+
+.jetprayer-crud-table th {
+	font-weight: 700 !important;
+	background-color: #f8fafc !important;
+	color: var(--jp-text-dark) !important;
+	padding: 12px 8px !important;
+	font-size: 13px !important;
+	border-bottom: 2px solid var(--jp-border) !important;
+}
+
+.jetprayer-crud-table td {
+	padding: 10px 8px !important;
+	font-size: 13px !important;
+	vertical-align: middle !important;
+}
+
+.jetprayer-crud-table tbody tr:hover {
+	background-color: #f1f5f9 !important;
+}
+
+.font-mono {
+	font-family: monospace;
+	font-size: 14px;
+}
+
+.text-center {
+	text-align: center !important;
+}
+
+.jetprayer-crud-table td.error {
+	color: #ef4444;
+}
+
+.jp-col-cb {
+	width: 40px !important;
+	text-align: center !important;
+}
+
+.jp-col-date {
+	width: 110px;
+	font-weight: 600;
+}
+
+.jp-col-status {
+	width: 80px;
+}
+
+.jp-col-actions {
+	width: 120px;
+}
+
+.jp-badge {
+	display: inline-block;
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 1.5;
+	padding: 2px 6px;
+	border-radius: 4px;
+	text-transform: uppercase;
+}
+
+.jp-badge-synced {
+	background: #dcfce7;
+	color: #15803d;
+}
+
+.jp-badge-custom {
+	background: #fef3c7;
+	color: #b45309;
+}
+
+/* Inline Edit Controls */
+.jp-inline-input {
+	width: 50px !important;
+	padding: 2px 4px !important;
+	margin: 0 !important;
+	font-size: 12px !important;
+	font-family: monospace;
+	text-align: center;
+	border: 1px solid var(--jp-border) !important;
+	border-radius: 4px !important;
+}
+
+.jp-inline-input:focus {
+	border-color: var(--jp-accent) !important;
+	outline: none;
+}
+
+.jp-inline-input.wide {
+	width: 120px !important;
+	text-align: left;
+}
+
+.jp-col-actions button {
+	margin-right: 4px;
+}
+
+.jp-col-actions button:last-child {
+	margin-right: 0;
+}
+
+/* Pagination navigation bar style */
+.jp-pagination-nav {
+	margin-top: 25px;
+	padding-top: 20px;
+	border-top: 1px solid var(--jp-border);
+	display: flex;
+	justify-content: center;
+}
+
+.jp-pagination-nav-inner {
+	width: 100%;
+}
+
+.jp-pagination-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 6px;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.jp-pagination-item {
+	margin: 0;
+	padding: 0;
+}
+
+.jp-pagination-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background: #f8fafc;
+	border: 1px solid var(--jp-border);
+	color: var(--jp-text-light);
+	font-size: 13px;
+	font-weight: 600;
+	padding: 6px 12px;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	outline: none;
+	height: 32px;
+	line-height: 1;
+}
+
+.jp-pagination-button:hover:not(:disabled):not(.jp-active) {
+	background: #f1f5f9;
+	color: var(--jp-primary);
+	border-color: #cbd5e1;
+}
+
+.jp-pagination-button.jp-active {
+	background: var(--jp-primary);
+	color: #ffffff;
+	border-color: var(--jp-primary);
+	box-shadow: 0 2px 4px rgba(2, 132, 199, 0.2);
+}
+
+.jp-pagination-button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.jp-pagination-prev,
+.jp-pagination-next {
+	padding: 6px 14px;
+	background: #ffffff;
+}
+
+.jp-pagination-prev span.dashicons,
+.jp-pagination-next span.dashicons {
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+	line-height: 1;
+}
+
+.jp-pagination-prev span.dashicons {
+	margin-right: 4px;
+}
+
+.jp-pagination-next span.dashicons {
+	margin-left: 4px;
+}
+
+@media (max-width: 782px) {
+	.jp-pagination-list {
+		gap: 4px;
+	}
+	.jp-pagination-button {
+		font-size: 11px;
+		padding: 4px 8px;
+		height: 28px;
+	}
+	.jp-pagination-prev,
+	.jp-pagination-next {
+		padding: 4px 10px;
+	}
+}
+
+/* Displays tab: layout sub-tabs */
+.jetprayer-display-subtabs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 25px;
+}
+
+.jp-subtab-link {
+	background: #f8fafc;
+	border: 1px solid var(--jp-border);
+	border-radius: 999px;
+	color: var(--jp-text-light);
+	font-weight: 600;
+	font-size: 13px;
+	padding: 8px 18px;
+	text-decoration: none;
+	transition: all 0.2s ease;
+}
+
+.jp-subtab-link:hover {
+	background: #f1f5f9;
+	color: var(--jp-primary);
+}
+
+.jp-subtab-link.jp-subtab-active {
+	background: var(--jp-primary);
+	border-color: var(--jp-primary);
+	color: #ffffff;
+	box-shadow: 0 2px 4px rgba(2, 132, 199, 0.25);
+}
+
+.jp-display-panel {
+	display: none;
+}
+
+.jp-display-panel.active {
+	display: block;
+}
+
+.jp-display-section {
+	margin-bottom: 25px;
+}
+
+.jp-display-section h3 {
+	font-size: 14px;
+	font-weight: 700;
+	margin: 0 0 15px 0;
+	padding-bottom: 8px;
+	border-bottom: 1px solid var(--jp-border);
+	color: var(--jp-text-dark);
+}
+
+/* Toggle switches */
+.jp-toggle-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+	gap: 12px 18px;
+}
+
+.jp-toggle {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	cursor: pointer;
+	font-weight: normal;
+	font-size: 13px;
+	color: var(--jp-text-dark);
+}
+
+.jp-toggle input[type="checkbox"] {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.jp-toggle-slider {
+	position: relative;
+	flex: 0 0 36px;
+	width: 36px;
+	height: 20px;
+	background: #cbd5e1;
+	border-radius: 999px;
+	transition: background 0.2s ease;
+}
+
+.jp-toggle-slider::before {
+	content: "";
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: 16px;
+	height: 16px;
+	background: #ffffff;
+	border-radius: 50%;
+	transition: transform 0.2s ease;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.jp-toggle input[type="checkbox"]:checked + .jp-toggle-slider {
+	background: var(--jp-primary);
+}
+
+.jp-toggle input[type="checkbox"]:checked + .jp-toggle-slider::before {
+	transform: translateX(16px);
+}
+
+.jp-toggle input[type="checkbox"]:focus-visible + .jp-toggle-slider {
+	box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.4);
+}
+
+.jp-toggle-label {
+	line-height: 1.3;
+}
+
+/* Color & range fields */
+.jp-color-field {
+	width: 90px !important;
+}
+
+.jp-range-field {
+	width: 100%;
+}
+
+.jp-range-value {
+	font-family: monospace;
+	font-weight: 700;
+}
+
+/* Ensure settings fields inside grid columns stay side-by-side and ignore core WP constraints */
+.jp-form-row .jp-form-group input,
+.jp-form-row .jp-form-group select {
+	width: 100% !important;
+	max-width: 100% !important;
+	box-sizing: border-box !important;
+}
+
+/* Ensure datalists are not visible on screen */
+datalist {
+	display: none !important;
+}
+
+/* Bulk Modal styling */
+.jp-modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(15, 23, 42, 0.6);
+	backdrop-filter: blur(8px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 99999;
+	transition: opacity 0.3s ease;
+}
+
+.jp-modal-card {
+	background: var(--jp-bg-card);
+	width: 90%;
+	max-width: 650px;
+	border-radius: var(--jp-radius);
+	box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.1);
+	border: 1px solid var(--jp-border);
+	overflow: hidden;
+	animation: modalSlide 0.3s ease-out;
+}
+
+@keyframes modalSlide {
+	from { transform: translateY(20px); opacity: 0; }
+	to { transform: translateY(0); opacity: 1; }
+}
+
+.jp-modal-header {
+	padding: 20px 24px;
+	border-bottom: 1px solid var(--jp-border);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: #f8fafc;
+}
+
+.jp-modal-header h3 {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 700;
+	color: var(--jp-text-dark);
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.jp-modal-header h3 span.dashicons {
+	color: var(--jp-primary);
+	font-size: 20px;
+	width: 20px;
+	height: 20px;
+}
+
+.jp-modal-close {
+	background: none;
+	border: none;
+	font-size: 28px;
+	font-weight: 300;
+	color: var(--jp-text-light);
+	cursor: pointer;
+	line-height: 1;
+	padding: 0;
+	margin: 0;
+	transition: color 0.2s ease;
+}
+
+.jp-modal-close:hover {
+	color: #ef4444;
+}
+
+.jp-modal-body {
+	padding: 24px;
+}
+
+.jp-bulk-instructions pre {
+	background: #f1f5f9;
+	border: 1px solid var(--jp-border);
+	padding: 10px 12px;
+	border-radius: 6px;
+	overflow-x: auto;
+	font-family: monospace;
+	font-size: 12px;
+	margin: 8px 0;
+}
+
+.jp-bulk-instructions .desc-small {
+	font-size: 12px;
+	color: #64748b;
+	margin-top: -4px;
+	margin-bottom: 12px;
+	font-style: italic;
+}
+
+.jp-bulk-instructions h4 {
+	font-size: 13px;
+	font-weight: 700;
+	margin: 15px 0 10px 0;
+}
+
+/* Progress bar styling */
+.jp-progress-bar-wrapper {
+	width: 100%;
+	height: 12px;
+	background: #e2e8f0;
+	border-radius: 999px;
+	overflow: hidden;
+}
+
+.jp-progress-bar {
+	height: 100%;
+	background: linear-gradient(90deg, var(--jp-primary) 0%, var(--jp-accent) 100%);
+	border-radius: 999px;
+	transition: width 0.3s ease;
+}
+
+/* Classes to replace inline styles and comply with WordPress.org Guidelines */
+.jp-flex-header {
+	display: flex !important;
+	align-items: center !important;
+	justify-content: space-between !important;
+	flex-wrap: wrap !important;
+	gap: 10px !important;
+}
+
+.jp-bulk-btn-header {
+	font-size: 13px !important;
+	font-weight: 600 !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	gap: 6px !important;
+	height: 32px !important;
+	line-height: 30px !important;
+}
+
+.jp-header-icon {
+	margin: 0 !important;
+	font-size: 18px !important;
+	width: 18px !important;
+	height: 18px !important;
+	line-height: 1 !important;
+}
+
+.jp-city-note {
+	margin-top: 10px !important;
+	font-style: italic !important;
+	color: #666 !important;
+}
+
+.jp-sync-log-style {
+	margin-top: 20px !important;
+}
+
+.jp-card-margin-top {
+	margin-top: 20px !important;
+}
+
+.jp-sync-btn-wrapper {
+	margin-top: 20px !important;
+}
+
+.jp-sync-btn-style {
+	height: 40px !important;
+	line-height: 38px !important;
+	padding: 0 20px !important;
+	font-size: 14px !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	gap: 8px !important;
+	width: 100% !important;
+}
+
+.jp-sync-btn-icon {
+	margin: 0 !important;
+	font-size: 20px !important;
+	width: 20px !important;
+	height: 20px !important;
+	line-height: 1 !important;
+}
+
+.jp-shortcode-guide-box {
+	margin-top: 25px !important;
+	padding: 20px !important;
+	background: #f8fafc !important;
+	border: 1px solid var(--jp-border) !important;
+	border-radius: 8px !important;
+}
+
+.jp-shortcode-guide-title {
+	margin-top: 0 !important;
+	font-size: 15px !important;
+	font-weight: 700 !important;
+	color: var(--jp-text-dark) !important;
+}
+
+.jp-shortcode-guide-desc {
+	font-size: 13px !important;
+	line-height: 1.5 !important;
+	color: #475569 !important;
+}
+
+.jp-shortcode-guide-list {
+	list-style: disc !important;
+	padding-left: 20px !important;
+	font-size: 13px !important;
+	line-height: 1.6 !important;
+	color: #334155 !important;
+	margin-bottom: 20px !important;
+}
+
+.jp-shortcode-guide-example-title {
+	font-size: 13px !important;
+	font-weight: 700 !important;
+	margin-bottom: 8px !important;
+	color: var(--jp-text-dark) !important;
+}
+
+.jp-shortcode-guide-example-box {
+	background: #ffffff !important;
+	border: 1px solid var(--jp-border) !important;
+	padding: 12px !important;
+	border-radius: 6px !important;
+	font-family: monospace !important;
+	font-size: 12px !important;
+	line-height: 1.6 !important;
+	color: #0f172a !important;
+	margin-bottom: 15px !important;
+}
+
+.jp-desc-margin-top {
+	margin-top: 20px !important;
+}
+
+.jp-table-max-width {
+	max-width: 600px !important;
+	margin-top: 10px !important;
+}
+
+.jp-table-id-header {
+	width: 60px !important;
+}
+
+.jp-method-badge-gray {
+	display: inline-block !important;
+	margin: 4px 6px 4px 0 !important;
+	padding: 5px 10px !important;
+	background: #f1f5f9 !important;
+	border-radius: 4px !important;
+	font-size: 12px !important;
+	font-weight: 600 !important;
+	color: #1e293b !important;
+	border: 1px solid #cbd5e1 !important;
+}
+
+.jp-bulk-actions-row {
+	margin: 20px 0 !important;
+	display: flex !important;
+	gap: 15px !important;
+}
+
+.jp-cursor-pointer {
+	cursor: pointer !important;
+}
+
+.jp-vertical-align-middle {
+	vertical-align: middle !important;
+}
+
+.jp-display-none {
+	display: none !important;
+}
+
+.jp-bulk-inst-title {
+	margin: 0 0 10px 0 !important;
+	font-size: 14px !important;
+	font-weight: 700 !important;
+	color: var(--jp-text-dark) !important;
+}
+
+.jp-bulk-inst-format-title {
+	margin: 5px 0 !important;
+	font-weight: 600 !important;
+	font-size: 13px !important;
+	color: var(--jp-text-dark) !important;
+}
+
+.jp-bulk-inst-format-title-alt {
+	margin: 10px 0 5px 0 !important;
+	font-weight: 600 !important;
+	font-size: 13px !important;
+	color: var(--jp-text-dark) !important;
+}
+
+.jp-progress-stats {
+	margin-top: 10px !important;
+	display: flex !important;
+	justify-content: space-between !important;
+	font-weight: bold !important;
+}
+
+.jp-bulk-footer-actions {
+	margin-top: 20px !important;
+	text-align: right !important;
+	display: flex !important;
+	justify-content: flex-end !important;
+	gap: 10px !important;
+}
+
+.jp-bulk-cancel-btn-style {
+	color: #ef4444 !important;
+	font-weight: 600 !important;
+	text-decoration: none !important;
+}
+

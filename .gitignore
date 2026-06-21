@@ -1,0 +1,25 @@
+# JetPrayer Git Ignore File
+
+# Dependencies
+node_modules/
+vendor/
+
+# OS/IDE clutter
+.DS_Store
+.vscode/
+.idea/
+
+# Build artifacts
+dist/
+build/
+*.zip
+
+# Local files
+.env
+.env.local
+.env.*.local
+
+# API specifications and markdown documents
+api-aladhan.json
+api-aladhan_description.rtf
+*.md
