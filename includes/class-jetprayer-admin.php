@@ -34,7 +34,7 @@ class JetPrayer_Admin {
 			'jetprayer',
 			array( $this, 'render_admin_page' ),
 			'dashicons-clock',
-			3
+			40
 		);
 	}
 

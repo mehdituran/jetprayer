@@ -1,6 +1,6 @@
 === JetPrayer - Islamic Prayer Times ===
 Contributors: mehdituran
-Tags: prayer times, islamic, namaz, adhan, salat
+Tags: prayer times, islamic, namaz, adhan, ezan
 Requires at least: 6.2
 Tested up to: 7.0
 Stable tag: 1.0.0
@@ -19,7 +19,7 @@ JetPrayer includes a beautiful, premium visual style engine with support for fiv
 ### 3rd Party Service Integration
 This plugin relies on the external, 3rd party service **AlAdhan API** to fetch and synchronize Islamic prayer times for your target locations.
 *   **Service URL**: https://aladhan.com / https://api.aladhan.com
-*   **Terms of Service**: https://aladhan.com/terms
+*   **Terms of Service**: https://aladhan.com/credits-and-terms
 *   **Data Sent**: The plugin makes remote HTTP requests sending only the location credentials (city name/country name or latitude/longitude coordinates), calculation method ID, Asr school, and year. No personal user data, IP addresses, or visitor tracking data is transmitted to the external service.
 
 ### Features

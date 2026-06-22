@@ -1,0 +1,18 @@
+# Exclude development environments and local temp files from distribution zip
+.DS_Store
+.git
+.github
+.gitignore
+.distignore
+node_modules/
+prd.md
+docker-compose.yml
+api-aladhan.json
+api-aladhan_description.rtf
+wp-plugins-jetreader-stable-tr.po
+jetprayer-v1.0.0.zip
+jetprayer.zip
+
+# Exclude custom local audio downloader script folder and downloaded files
+adh-mp3/
+adhan-audios/

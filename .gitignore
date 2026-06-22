@@ -23,3 +23,7 @@ build/
 api-aladhan.json
 api-aladhan_description.rtf
 *.md
+
+# Audio downloader folder & downloaded audios
+adh-mp3/
+adhan-audios/
