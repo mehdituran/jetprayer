@@ -789,7 +789,7 @@ $jp_display_layouts = array(
 					</div>
 
 					<div class="jp-bulk-instructions">
-						<h4 class="jp-bulk-inst-title"><?php esc_html_e( 'JSON Template Guide & Formats / Şablon Rehberi:', 'jetprayer' ); ?></h4>
+						<h4 class="jp-bulk-inst-title"><?php esc_html_e( 'JSON Template Guide & Formats:', 'jetprayer' ); ?></h4>
 						
 						<p class="jp-bulk-inst-format-title"><strong><?php esc_html_e( 'Format 1 (Simple City List):', 'jetprayer' ); ?></strong></p>
 						<pre><code>{
@@ -806,6 +806,19 @@ $jp_display_layouts = array(
   ]
 }</code></pre>
 						<p class="desc-small"><?php esc_html_e( 'Sanaa uses Method 7 & Year 2026. Aden and Taiz use Method 4 & Year 2026. If no values follow, it defaults to the main form method and year.', 'jetprayer' ); ?></p>
+
+						<p class="jp-bulk-inst-format-title-alt"><strong><?php esc_html_e( 'Format 3 (Single Method & Year for All Cities in Group):', 'jetprayer' ); ?></strong></p>
+						<pre><code>{
+  "Spain": [
+    "Madrid",
+    "Barcelona",
+    "Valencia",
+    "Seville",
+    "3",
+    "2026"
+  ]
+}</code></pre>
+						<p class="desc-small"><?php esc_html_e( 'All cities in the list (Madrid, Barcelona, Valencia, and Seville) will be synced using Method 3 & Year 2026 because the method and year are placed at the end of the group.', 'jetprayer' ); ?></p>
 					</div>
 				</div>
 
@@ -840,12 +853,12 @@ $jp_display_layouts = array(
 				<button type="button" class="jp-delete-modal-close jp-modal-close">&times;</button>
 			</div>
 			<div class="jp-modal-body">
-				<p style="margin-bottom: 20px; font-weight: 500; font-size: 14px;"><?php esc_html_e( 'Bu kayıtları veritabanından nasıl silmek istersiniz?', 'jetprayer' ); ?></p>
+				<p style="margin-bottom: 20px; font-weight: 500; font-size: 14px;"><?php esc_html_e( 'How would you like to delete these records from the database?', 'jetprayer' ); ?></p>
 				
 				<div class="jp-form-group" style="background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid var(--jp-border); margin-bottom: 20px;">
 					<label class="jp-radio-label" style="font-weight: normal; margin-bottom: 15px; display: block; cursor: pointer;">
 						<input type="radio" name="jp-delete-type" value="selected" checked style="margin-right: 8px;">
-						<strong><?php esc_html_e( 'Sadece seçilen günleri sil', 'jetprayer' ); ?></strong>
+						<strong><?php esc_html_e( 'Delete selected days only', 'jetprayer' ); ?></strong>
 						<span style="display: block; font-size: 12px; color: #64748b; margin-left: 28px; margin-top: 4px;" id="jp-delete-selected-desc"></span>
 					</label>
 					
@@ -853,7 +866,7 @@ $jp_display_layouts = array(
 					
 					<label class="jp-radio-label" style="font-weight: normal; display: block; cursor: pointer;">
 						<input type="radio" name="jp-delete-type" value="year" style="margin-right: 8px;">
-						<strong style="color: #dc2626;"><?php esc_html_e( 'Tüm yılı sil (Bütün aylar)', 'jetprayer' ); ?></strong>
+						<strong style="color: #dc2626;"><?php esc_html_e( 'Delete entire year (All months)', 'jetprayer' ); ?></strong>
 						<span style="display: block; font-size: 12px; color: #64748b; margin-left: 28px; margin-top: 4px;" id="jp-delete-year-desc"></span>
 					</label>
 				</div>

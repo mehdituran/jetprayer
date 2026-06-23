@@ -29,6 +29,7 @@ This plugin relies on the external, 3rd party service **AlAdhan API** to fetch a
 *   **Auto-Detect & Country-Grouped Switcher**: Dynamically group synced cities by country in frontend dropdowns. Automatically resolves calculations for identical cities under different timing methods (e.g. Istanbul Diyanet vs. Istanbul MWL) and uses visitor IP geolocation to auto-select the closest synced city based on distance.
 *   **Timetable CRUD Editor**: Manually view, edit, or customize individual prayer timings day-by-day directly in the database manager.
 *   **AlAdhan API Sync**: Sync location-based calculation methods (including Diyanet Turkey, Shia Jafari, Makkah, ISNA, and more).
+*   **Bulk Add & Sync**: Import and synchronize multiple cities and countries in bulk using a simple JSON file format, complete with real-time progress logging and cancellation controls.
 *   **Gutenberg Block & Elementor Widget Integration**: Drag-and-drop the JetPrayer block (Gutenberg) or the native "JetPrayer - Prayer Times" widget (Elementor) into your editor, or use standard shortcodes.
 
 == Installation ==
@@ -76,6 +77,13 @@ Yes! If you manually edit prayer times in the CRUD Database Editor, the row is m
 
 = What is the default location and how do I change it? =
 The default location is the city/country or coordinates configured and last synced in the "Settings & Sync" dashboard. This is saved as the default options values in the database, and the shortcode `[jetprayer]` will display this location by default. If you sync multiple locations, you can change the default location anytime by entering its details in the settings form and clicking "Sync".
+
+= How does the Bulk Add & Sync feature work? =
+In the Settings & Sync panel, click the "Bulk Add & Sync" button. You can upload a JSON file containing a list of countries and cities. The plugin supports three formats:
+1. **Simple City List**: A list of cities (e.g. `["Istanbul", "Ankara"]`) which uses the form's default method and year.
+2. **Custom Per-City**: Specifying a custom calculation method ID and year immediately following each city.
+3. **Grouped with Single Method/Year**: A list of multiple cities followed by a single method and year at the end, which automatically applies those settings to all preceding cities in the group (e.g. `["Madrid", "Barcelona", "3", "2026"]`).
+The plugin will download and cache all timings sequentially with real-time progress log output.
 
 == Screenshots ==
 
