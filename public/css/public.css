@@ -620,8 +620,25 @@
 	box-shadow: 0 0 10px var(--jp-theme-primary-glow);
 }
 
+.jp-city-switcher optgroup {
+	background: #0f172a;
+	color: var(--jp-theme-primary);
+	font-weight: 700;
+	font-size: 13px;
+	padding: 8px 12px;
+	font-style: normal;
+}
+
 .jp-city-switcher option {
 	background: #1e293b;
+	color: #ffffff;
+	padding: 8px 12px;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.jp-city-switcher option:checked {
+	background: var(--jp-theme-primary);
 	color: #ffffff;
 }
 

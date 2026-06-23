@@ -124,35 +124,131 @@ class JetPrayer_Shortcodes {
 		// get_synced_locations() is DISTINCT per city+country+method_id (the
 		// admin "Locations & Methods" panel needs that granularity), so the
 		// same city synced under multiple methods yields duplicate rows here.
-		// The switcher only cares about unique city/country pairs.
-		$jp_seen_locations = array();
-		$locations = array_values( array_filter( $locations, function( $loc ) use ( &$jp_seen_locations ) {
-			$key = trim( strtolower( $loc['city'] ) ) . '|' . trim( strtolower( $loc['country'] ) );
-			if ( isset( $jp_seen_locations[ $key ] ) ) {
-				return false;
-			}
-			$jp_seen_locations[ $key ] = true;
-			return true;
-		} ) );
+		$is_default_shortcode = empty( $args['city'] ) && empty( $args['country'] );
 
-		// Resolve Country
-		$resolved_country = ! empty( $args['country'] ) ? trim( $args['country'] ) : get_option( 'jetprayer_country', '' );
-		if ( empty( $resolved_country ) && ! empty( $locations ) ) {
-			$resolved_country = $locations[0]['country'];
-		}
+		if ( $is_default_shortcode ) {
+			// Resolve active location from defaults or options
+			$default_city    = get_option( 'jetprayer_city', '' );
+			$default_country = get_option( 'jetprayer_country', '' );
+			$default_method  = get_option( 'jetprayer_method', '' );
 
-		// Resolve Cities based on resolved country
-		$candidate_cities = array();
-		if ( ! empty( $args['city'] ) ) {
-			$input_cities = array_map( 'trim', explode( ',', $args['city'] ) );
-			$seen_cities = array();
-			foreach ( $input_cities as $c ) {
-				if ( empty( $c ) ) {
-					continue;
-				}
-				$c_lower = strtolower( $c );
+			$active_location = null;
+			if ( ! empty( $default_city ) && ! empty( $default_country ) ) {
 				foreach ( $locations as $loc ) {
-					if ( trim( strtolower( $loc['country'] ) ) === trim( strtolower( $resolved_country ) ) && trim( strtolower( $loc['city'] ) ) === $c_lower ) {
+					if ( trim( strtolower( $loc['city'] ) ) === trim( strtolower( $default_city ) ) &&
+					     trim( strtolower( $loc['country'] ) ) === trim( strtolower( $default_country ) ) ) {
+						if ( ! empty( $default_method ) && intval( $loc['method_id'] ) === intval( $default_method ) ) {
+							$active_location = $loc;
+							break;
+						}
+						if ( null === $active_location ) {
+							$active_location = $loc;
+						}
+					}
+				}
+			}
+
+			// If default not found in database synced list, fallback to first synced location
+			if ( null === $active_location && ! empty( $locations ) ) {
+				$active_location = $locations[0];
+			}
+
+			if ( ! empty( $active_location ) ) {
+				$current_city     = $active_location['city'];
+				$resolved_country = $active_location['country'];
+				if ( empty( $args['method'] ) ) {
+					$method_id = intval( $active_location['method_id'] );
+				}
+			} else {
+				$current_city     = '';
+				$resolved_country = '';
+			}
+
+			$pair_counts = array();
+			foreach ( $locations as $loc ) {
+				$key = trim( strtolower( $loc['city'] ) ) . '|' . trim( strtolower( $loc['country'] ) );
+				if ( ! isset( $pair_counts[ $key ] ) ) {
+					$pair_counts[ $key ] = 0;
+				}
+				$pair_counts[ $key ]++;
+			}
+
+			$grouped_locations = array();
+			$method_names = JetPrayer_API::get_calculation_methods();
+
+			foreach ( $locations as $loc ) {
+				$country = $loc['country'];
+				$city    = $loc['city'];
+				$m_id    = intval( $loc['method_id'] );
+
+				$key = trim( strtolower( $city ) ) . '|' . trim( strtolower( $country ) );
+				
+				if ( isset( $pair_counts[ $key ] ) && $pair_counts[ $key ] > 1 ) {
+					$method_name = isset( $method_names[ $m_id ] ) ? $method_names[ $m_id ] : $m_id;
+					$label = $city . ' (' . $method_name . ')';
+				} else {
+					$label = $city;
+				}
+
+				if ( ! isset( $grouped_locations[ $country ] ) ) {
+					$grouped_locations[ $country ] = array();
+				}
+				
+				$grouped_locations[ $country ][] = array(
+					'city'      => $city,
+					'country'   => $country,
+					'method_id' => $m_id,
+					'label'     => $label,
+				);
+			}
+
+			ksort( $grouped_locations, SORT_NATURAL | SORT_FLAG_CASE );
+
+			$show_switcher = ( count( $locations ) > 1 );
+			$switcher_locations = $grouped_locations;
+		} else {
+			// Original logic for custom shortcodes with explicit attributes
+			$jp_seen_locations = array();
+			$flat_locations = array_values( array_filter( $locations, function( $loc ) use ( &$jp_seen_locations ) {
+				$key = trim( strtolower( $loc['city'] ) ) . '|' . trim( strtolower( $loc['country'] ) );
+				if ( isset( $jp_seen_locations[ $key ] ) ) {
+					return false;
+				}
+				$jp_seen_locations[ $key ] = true;
+				return true;
+			} ) );
+
+			// Resolve Country
+			$resolved_country = ! empty( $args['country'] ) ? trim( $args['country'] ) : get_option( 'jetprayer_country', '' );
+			if ( empty( $resolved_country ) && ! empty( $flat_locations ) ) {
+				$resolved_country = $flat_locations[0]['country'];
+			}
+
+			// Resolve Cities based on resolved country
+			$candidate_cities = array();
+			if ( ! empty( $args['city'] ) ) {
+				$input_cities = array_map( 'trim', explode( ',', $args['city'] ) );
+				$seen_cities = array();
+				foreach ( $input_cities as $c ) {
+					if ( empty( $c ) ) {
+						continue;
+					}
+					$c_lower = strtolower( $c );
+					foreach ( $flat_locations as $loc ) {
+						if ( trim( strtolower( $loc['country'] ) ) === trim( strtolower( $resolved_country ) ) && trim( strtolower( $loc['city'] ) ) === $c_lower ) {
+							if ( ! in_array( $c_lower, $seen_cities, true ) ) {
+								$seen_cities[] = $c_lower;
+								$candidate_cities[] = $loc['city'];
+							}
+						}
+					}
+				}
+			} else {
+				// No city specified: Load all synced cities for that country
+				$seen_cities = array();
+				foreach ( $flat_locations as $loc ) {
+					if ( trim( strtolower( $loc['country'] ) ) === trim( strtolower( $resolved_country ) ) ) {
+						$c_lower = strtolower( trim( $loc['city'] ) );
 						if ( ! in_array( $c_lower, $seen_cities, true ) ) {
 							$seen_cities[] = $c_lower;
 							$candidate_cities[] = $loc['city'];
@@ -160,28 +256,34 @@ class JetPrayer_Shortcodes {
 					}
 				}
 			}
-		} else {
-			// No city specified: Load all synced cities for that country
-			$seen_cities = array();
-			foreach ( $locations as $loc ) {
-				if ( trim( strtolower( $loc['country'] ) ) === trim( strtolower( $resolved_country ) ) ) {
-					$c_lower = strtolower( trim( $loc['city'] ) );
-					if ( ! in_array( $c_lower, $seen_cities, true ) ) {
-						$seen_cities[] = $c_lower;
-						$candidate_cities[] = $loc['city'];
+
+			if ( empty( $candidate_cities ) ) {
+				// translators: %s: country name.
+				return '<div class="jetprayer-alert jetprayer-alert-warning">' . sprintf( esc_html__( 'No synced cities found in database for country: %s. Please sync in the dashboard.', 'jetprayer' ), esc_html( $resolved_country ) ) . '</div>';
+			}
+
+			// Automatically show switcher if there are multiple cities
+			$show_switcher = ( count( $candidate_cities ) > 1 );
+			$current_city  = $candidate_cities[0];
+
+			// Build the switcher options array matching the structure of $locations
+			$switcher_locations = array();
+			foreach ( $candidate_cities as $city_name ) {
+				$found_method_id = null;
+				foreach ( $locations as $loc ) {
+					if ( trim( strtolower( $loc['city'] ) ) === trim( strtolower( $city_name ) ) && 
+					     trim( strtolower( $loc['country'] ) ) === trim( strtolower( $resolved_country ) ) ) {
+						$found_method_id = intval( $loc['method_id'] );
+						break;
 					}
 				}
+				$switcher_locations[] = array(
+					'city'      => $city_name,
+					'country'   => $resolved_country,
+					'method_id' => $found_method_id,
+				);
 			}
 		}
-
-		if ( empty( $candidate_cities ) ) {
-			// translators: %s: country name.
-			return '<div class="jetprayer-alert jetprayer-alert-warning">' . sprintf( esc_html__( 'No synced cities found in database for country: %s. Please sync in the dashboard.', 'jetprayer' ), esc_html( $resolved_country ) ) . '</div>';
-		}
-
-		// Automatically show switcher if there are multiple cities
-		$show_switcher = ( count( $candidate_cities ) > 1 );
-		$current_city  = $candidate_cities[0];
 
 		$timings = JetPrayer_DB::get_timings_for_date( $target_date, $method_id, $current_city, $resolved_country );
 
@@ -199,17 +301,8 @@ class JetPrayer_Shortcodes {
 				? get_option( 'jetprayer_latitude', '' ) . ', ' . get_option( 'jetprayer_longitude', '' )
 				: $current_city . ( ! empty( $resolved_country ) ? ', ' . $resolved_country : '' ) );
 
-		// Build the switcher options array matching the structure of $locations
-		$switcher_locations = array();
-		foreach ( $candidate_cities as $city_name ) {
-			$switcher_locations[] = array(
-				'city'    => $city_name,
-				'country' => $resolved_country
-			);
-		}
-
 		// Build City Switcher HTML if enabled
-		$switcher_html = $this->render_city_switcher( $show_switcher, $current_city, $resolved_country, $switcher_locations );
+		$switcher_html = $this->render_city_switcher( $show_switcher, $current_city, $resolved_country, $switcher_locations, $method_id );
 
 		ob_start();
 
@@ -253,6 +346,9 @@ class JetPrayer_Shortcodes {
 			'id'         => true,
 			'name'       => true,
 			'aria-label' => true,
+		);
+		$allowed_html['optgroup'] = array(
+			'label' => true,
 		);
 		$allowed_html['option'] = array(
 			'value'    => true,
@@ -347,7 +443,7 @@ class JetPrayer_Shortcodes {
 	/**
 	 * Render the city switcher select element.
 	 */
-	private function render_city_switcher( $show_switcher, $current_city, $current_country, $locations ) {
+	private function render_city_switcher( $show_switcher, $current_city, $current_country, $locations, $current_method_id = null ) {
 		if ( 'true' !== $show_switcher && true !== $show_switcher ) {
 			return '';
 		}
@@ -360,15 +456,50 @@ class JetPrayer_Shortcodes {
 		?>
 		<div class="jp-switcher-container">
 			<select class="jp-city-switcher" aria-label="<?php esc_attr_e( 'Select City', 'jetprayer' ); ?>">
-				<?php foreach ( $locations as $loc ) :
-					$val = $loc['city'] . '|' . $loc['country'];
-					$label = $loc['city'] . ( ! empty( $loc['country'] ) ? ', ' . $loc['country'] : '' );
-					$is_selected = ( trim( strtolower( $loc['city'] ) ) === trim( strtolower( $current_city ) ) && trim( strtolower( $loc['country'] ) ) === trim( strtolower( $current_country ) ) );
-					?>
-					<option value="<?php echo esc_attr( $val ); ?>" <?php selected( $is_selected ); ?>>
-						<?php echo esc_html( $label ); ?>
-					</option>
-				<?php endforeach; ?>
+				<?php
+				$first_key  = key( $locations );
+				$is_grouped = ! is_numeric( $first_key );
+
+				if ( $is_grouped ) {
+					foreach ( $locations as $country => $cities ) {
+						?>
+						<optgroup label="<?php echo esc_attr( $country ); ?>">
+							<?php
+							foreach ( $cities as $loc ) {
+								$val         = $loc['city'] . '|' . $loc['country'] . '|' . $loc['method_id'];
+								$is_selected = (
+									trim( strtolower( $loc['city'] ) ) === trim( strtolower( $current_city ) ) &&
+									trim( strtolower( $loc['country'] ) ) === trim( strtolower( $current_country ) ) &&
+									( null === $current_method_id || intval( $loc['method_id'] ) === intval( $current_method_id ) )
+								);
+								?>
+								<option value="<?php echo esc_attr( $val ); ?>" <?php selected( $is_selected ); ?>>
+									<?php echo esc_html( $loc['label'] ); ?>
+								</option>
+								<?php
+							}
+							?>
+						</optgroup>
+						<?php
+					}
+				} else {
+					foreach ( $locations as $loc ) {
+						$method_part = isset( $loc['method_id'] ) ? '|' . $loc['method_id'] : '';
+						$val         = $loc['city'] . '|' . $loc['country'] . $method_part;
+						$label       = $loc['city'] . ( ! empty( $loc['country'] ) ? ', ' . $loc['country'] : '' );
+						$is_selected = (
+							trim( strtolower( $loc['city'] ) ) === trim( strtolower( $current_city ) ) &&
+							trim( strtolower( $loc['country'] ) ) === trim( strtolower( $current_country ) ) &&
+							( ! isset( $loc['method_id'] ) || null === $current_method_id || intval( $loc['method_id'] ) === intval( $current_method_id ) )
+						);
+						?>
+						<option value="<?php echo esc_attr( $val ); ?>" <?php selected( $is_selected ); ?>>
+							<?php echo esc_html( $label ); ?>
+						</option>
+						<?php
+					}
+				}
+				?>
 			</select>
 		</div>
 		<?php
@@ -777,6 +908,9 @@ class JetPrayer_Shortcodes {
 			'select' => array(
 				'class'      => true,
 				'aria-label' => true,
+			),
+			'optgroup' => array(
+				'label' => true,
 			),
 			'option' => array(
 				'value'    => true,

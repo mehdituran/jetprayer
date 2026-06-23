@@ -1,3 +1,5 @@
+/* global jQuery, jetprayerAdmin, jetprayerCountriesData, FileReader */
+/* eslint-disable no-alert, no-console, camelcase, @wordpress/valid-sprintf, object-shorthand, @wordpress/no-unused-vars-before-return, no-unused-vars, no-undef */
 jQuery( document ).ready( function ( $ ) {
 	'use strict';
 

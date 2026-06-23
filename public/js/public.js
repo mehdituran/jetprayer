@@ -1,3 +1,4 @@
+/* global jQuery */
 jQuery( document ).ready( function ( $ ) {
 	'use strict';
 
@@ -43,15 +44,17 @@ jQuery( document ).ready( function ( $ ) {
 	$( document ).on( 'change', '.jp-city-switcher', function () {
 		const select = $( this );
 		const val = select.val();
-		if ( ! val ) return;
+		if ( ! val ) {
+			return;
+		}
 
 		const parts = val.split( '|' );
 		const city = parts[ 0 ];
 		const country = parts[ 1 ] || '';
+		const methodId = parts[ 2 ] || '';
 
 		const wrapper = select.closest( '[data-layout]' );
 		const layout = wrapper.data( 'layout' );
-		const method = wrapper.data( 'method' );
 		const date = wrapper.data( 'date' );
 
 		// Update data attributes on wrapper immediately
@@ -59,6 +62,12 @@ jQuery( document ).ready( function ( $ ) {
 		wrapper.data( 'country', country );
 		wrapper.attr( 'data-city', city );
 		wrapper.attr( 'data-country', country );
+
+		if ( methodId ) {
+			wrapper.data( 'method', methodId );
+			wrapper.attr( 'data-method', methodId );
+		}
+		const method = wrapper.data( 'method' );
 
 		// 1. Fetch single date timings for card/grid/slider/ticker/modal mini-card
 		const restBase =
@@ -68,14 +77,14 @@ jQuery( document ).ready( function ( $ ) {
 			start_date: date,
 			end_date: date,
 			method_id: method,
-			city: city,
-			country: country,
+			city,
+			country,
 		} );
 
 		$.ajax( {
-			url: url,
+			url,
 			method: 'GET',
-			success: function ( response ) {
+			success( response ) {
 				if (
 					response.success &&
 					response.data &&
@@ -169,14 +178,14 @@ jQuery( document ).ready( function ( $ ) {
 					start_date: startDate,
 					end_date: endDate,
 					method_id: method,
-					city: city,
-					country: country,
+					city,
+					country,
 				} );
 
 				$.ajax( {
 					url: rangeUrl,
 					method: 'GET',
-					success: function ( response ) {
+					success( response ) {
 						if ( response.success && response.data ) {
 							const tbody = overlay.find(
 								'.jp-modal-table tbody'
@@ -295,7 +304,9 @@ jQuery( document ).ready( function ( $ ) {
 			wrapper.find( '[data-prayer]' ).each( function () {
 				const item = $( this );
 				const prayerKey = item.data( 'prayer' );
-				if ( ! prayerKey ) return;
+				if ( ! prayerKey ) {
+					return;
+				}
 
 				// Read the time text
 				let timeText = '';

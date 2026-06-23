@@ -234,6 +234,9 @@ class JetPrayer_Elementor_Widget extends Widget_Base {
 			'name'       => true,
 			'aria-label' => true,
 		);
+		$allowed_html['optgroup'] = array(
+			'label' => true,
+		);
 		$allowed_html['option'] = array(
 			'value'    => true,
 			'selected' => true,
