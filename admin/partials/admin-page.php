@@ -719,21 +719,21 @@ $jp_display_layouts = array(
 
 	<div id="jetprayer-tab-backup" class="jetprayer-tab-content">
 		<div class="jetprayer-card">
-			<h2><?php esc_html_e( 'Eklenti Verilerini Yedekle', 'jetprayer' ); ?></h2>
+			<h2><?php esc_html_e( 'Backup Plugin Data', 'jetprayer' ); ?></h2>
 			<p class="description">
-				<?php esc_html_e( 'Eklenti ayarlarınızı, yerleşim tasarımlarınızı ve namaz vakitlerini harici bir JSON dosyası olarak yedekleyebilirsiniz.', 'jetprayer' ); ?>
+				<?php esc_html_e( 'You can backup your plugin settings, layout designs, and prayer times as an external JSON file.', 'jetprayer' ); ?>
 			</p>
 
 			<div class="jp-form-group" style="margin-top: 25px; max-width: 600px;">
 				<div class="jp-backup-options" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 25px;">
-					<h4 style="margin: 0 0 15px 0; font-size: 14px; font-weight: 600; color: #334155; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;"><?php esc_html_e( 'Yedekleme Türünü Seçin', 'jetprayer' ); ?></h4>
+					<h4 style="margin: 0 0 15px 0; font-size: 14px; font-weight: 600; color: #334155; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;"><?php esc_html_e( 'Select Backup Type', 'jetprayer' ); ?></h4>
 					
 					<label style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px; cursor: pointer;">
 						<input type="radio" name="jp-backup-type" value="partial" checked style="margin-top: 3px;">
 						<div>
-							<strong style="color: #1e293b; font-size: 13.5px; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Kısmi Yedekleme (Önerilen)', 'jetprayer' ); ?></strong>
+							<strong style="color: #1e293b; font-size: 13.5px; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Partial Backup (Recommended)', 'jetprayer' ); ?></strong>
 							<span style="font-size: 12px; color: #64748b; line-height: 1.5; display: block;">
-								<?php esc_html_e( 'Sadece eklenti genel ayarlarını, yerleşim tasarımlarını (Displays), elle girilen özel vakitlerinizi ve senkronize edilmiş konum isimlerini yedekler. Saniyeler sürer, çok küçük boyutludur ve her sunucuda %100 sorunsuz çalışır.', 'jetprayer' ); ?>
+								<?php esc_html_e( 'Backs up only general plugin settings, layout customization (Displays), manually edited custom timings, and the list of synced location names. It is extremely fast, lightweight, and works seamlessly on any hosting environment.', 'jetprayer' ); ?>
 							</span>
 						</div>
 					</label>
@@ -743,9 +743,9 @@ $jp_display_layouts = array(
 					<label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;">
 						<input type="radio" name="jp-backup-type" value="full" style="margin-top: 3px;">
 						<div>
-							<strong style="color: #1e293b; font-size: 13.5px; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Tam Yedekleme (Büyük Veri)', 'jetprayer' ); ?></strong>
+							<strong style="color: #1e293b; font-size: 13.5px; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Full Backup (Large Data)', 'jetprayer' ); ?></strong>
 							<span style="font-size: 12px; color: #64748b; line-height: 1.5; display: block;">
-								<?php esc_html_e( 'Kısmi yedekleme verilerine ek olarak veritabanında önbelleğe alınmış tüm namaz vakti kayıtlarını (10 binlerce satırı) yedekler. Çok büyük veritabanlarında sunucu zaman aşımı veya bellek yetersizliği limitlerine takılma riski barındırır.', 'jetprayer' ); ?>
+								<?php esc_html_e( 'Backs up everything in the partial backup, plus all cached prayer time entries (tens of thousands of rows) from the database. This might cause server timeout or memory limit errors on low-spec hosting environments.', 'jetprayer' ); ?>
 							</span>
 						</div>
 					</label>
@@ -753,7 +753,7 @@ $jp_display_layouts = array(
 
 				<button type="button" id="jp-download-backup-btn" class="button button-primary jetprayer-btn" style="display: inline-flex; align-items: center; gap: 8px;">
 					<span class="dashicons dashicons-download jp-vertical-align-middle"></span>
-					<?php esc_html_e( 'Yedek Dosyasını İndir (JSON)', 'jetprayer' ); ?>
+					<?php esc_html_e( 'Download Backup File (JSON)', 'jetprayer' ); ?>
 				</button>
 			</div>
 		</div>

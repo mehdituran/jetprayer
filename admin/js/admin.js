@@ -1685,7 +1685,14 @@ jQuery( document ).ready( function ( $ ) {
 	$( '#jp-download-backup-btn' ).on( 'click', function () {
 		const type =
 			$( 'input[name="jp-backup-type"]:checked' ).val() || 'partial';
+		const separator = restUrl.indexOf( '?' ) !== -1 ? '&' : '?';
 		window.location.href =
-			restUrl + '/backup?type=' + type + '&_wpnonce=' + restNonce;
+			restUrl +
+			'/backup' +
+			separator +
+			'type=' +
+			type +
+			'&_wpnonce=' +
+			restNonce;
 	} );
 } );
