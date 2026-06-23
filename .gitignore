@@ -27,3 +27,7 @@ api-aladhan_description.rtf
 # Audio downloader folder & downloaded audios
 adh-mp3/
 adhan-audios/
+
+# SVN temporary checkout
+svn-checkout/
+

@@ -212,6 +212,20 @@ class JetPrayer_REST {
 				),
 			),
 		) );
+
+		// GET download backup file (JSON)
+		register_rest_route( $namespace, '/backup', array(
+			'methods'             => WP_REST_Server::READABLE,
+			'callback'            => array( $this, 'handle_backup' ),
+			'permission_callback' => array( $this, 'check_admin_permission' ),
+			'args'                => array(
+				'type' => array(
+					'required'          => false,
+					'default'           => 'partial',
+					'sanitize_callback' => 'sanitize_text_field',
+				),
+			),
+		) );
 	}
 
 	/**
@@ -560,6 +574,109 @@ class JetPrayer_REST {
 				'success' => true,
 				'data'    => $locations,
 			), 200 );
+		} catch ( Throwable $e ) {
+			return new WP_Error( 'rest_error', $e->getMessage(), array( 'status' => 500 ) );
+		}
+	}
+
+	/**
+	 * GET download backup file (JSON) handler with Chunked Streaming.
+	 */
+	public function handle_backup( WP_REST_Request $request ) {
+		try {
+			$type = sanitize_text_field( $request->get_param( 'type' ) );
+			if ( ! in_array( $type, array( 'partial', 'full' ), true ) ) {
+				$type = 'partial';
+			}
+
+			// 1. Fetch settings options
+			$settings = array(
+				'jetprayer_type'      => get_option( 'jetprayer_type', 'city' ),
+				'jetprayer_city'      => get_option( 'jetprayer_city', '' ),
+				'jetprayer_country'   => get_option( 'jetprayer_country', '' ),
+				'jetprayer_latitude'  => get_option( 'jetprayer_latitude', '41.0082' ),
+				'jetprayer_longitude' => get_option( 'jetprayer_longitude', '28.9784' ),
+				'jetprayer_method'    => get_option( 'jetprayer_method', '' ),
+				'jetprayer_school'    => get_option( 'jetprayer_school', '0' ),
+				'jetprayer_timezone'  => get_option( 'jetprayer_timezone', '' ),
+				'jetprayer_last_sync' => get_option( 'jetprayer_last_sync', '' ),
+			);
+
+			// Fetch display settings
+			foreach ( JetPrayer_Display_Settings::get_layout_keys() as $layout ) {
+				$settings[ 'jetprayer_display_' . $layout ] = get_option( 'jetprayer_display_' . $layout );
+			}
+
+			// 2. Fetch distinct synced locations (metadata list)
+			$locations = JetPrayer_DB::get_synced_locations();
+			$locations = JetPrayer_DB::clean_utf8( $locations );
+
+			// 3. Fetch custom timings (manually edited ones)
+			global $wpdb;
+			$table_name = $wpdb->prefix . 'jetprayer_times';
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$custom_timings = $wpdb->get_results( "SELECT * FROM {$table_name} WHERE is_custom = 1", ARRAY_A );
+			$custom_timings = JetPrayer_DB::clean_utf8( $custom_timings );
+
+			// Clean output buffer before sending headers
+			if ( ob_get_level() > 0 ) {
+				ob_end_clean();
+			}
+
+			// Format headers
+			header( 'Content-Description: File Transfer' );
+			header( 'Content-Type: application/json; charset=utf-8' );
+			header( 'Content-Disposition: attachment; filename=jetprayer-backup-' . $type . '-' . gmdate( 'Y-m-d' ) . '.json' );
+			header( 'Pragma: no-cache' );
+			header( 'Expires: 0' );
+
+			// 4. Start Streaming JSON output chunk-by-chunk to save memory
+			echo "{\n";
+			echo '  "plugin": "jetprayer",' . "\n";
+			echo '  "version": "' . esc_attr( JETPRAYER_VERSION ) . '",' . "\n";
+			echo '  "backup_type": "' . esc_attr( $type ) . '",' . "\n";
+			echo '  "backup_date": "' . esc_attr( current_time( 'mysql' ) ) . '",' . "\n";
+			echo '  "settings": ' . wp_json_encode( $settings ) . ",\n";
+			echo '  "locations": ' . wp_json_encode( $locations ) . ",\n";
+			echo '  "custom_times": ' . wp_json_encode( $custom_timings ? $custom_timings : array() );
+
+			if ( 'full' === $type ) {
+				echo ",\n";
+				echo '  "timings": [' . "\n";
+				
+				$chunk_size = 500;
+				$offset = 0;
+				$first = true;
+				
+				while ( true ) {
+					// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+					$rows = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$table_name} LIMIT %d OFFSET %d", $chunk_size, $offset ), ARRAY_A );
+					if ( empty( $rows ) ) {
+						break;
+					}
+					$rows = JetPrayer_DB::clean_utf8( $rows );
+					foreach ( $rows as $row ) {
+						if ( ! $first ) {
+							echo ",\n";
+						}
+						echo '    ' . wp_json_encode( $row );
+						$first = false;
+					}
+					$offset += $chunk_size;
+
+					// Flush immediately to output buffer
+					if ( ob_get_level() > 0 ) {
+						ob_flush();
+					}
+					flush();
+				}
+				echo "\n  ]\n";
+			} else {
+				echo ",\n";
+				echo '  "timings": []' . "\n";
+			}
+			echo "}\n";
+			exit;
 		} catch ( Throwable $e ) {
 			return new WP_Error( 'rest_error', $e->getMessage(), array( 'status' => 500 ) );
 		}

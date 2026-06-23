@@ -3,7 +3,7 @@
  * Plugin Name:  JetPrayer - Islamic Prayer Times
  * Plugin URI:   https://github.com/mehdituran/jetprayer
  * Description:  A performance-optimized, secure, and robust WordPress plugin that displays Islamic prayer times using local caching to avoid external API calls. Features gorgeous grids, sliders, tickers, and modals.
- * Version:      1.0.0
+ * Version:      1.0.1
  * Author:       Mehdi Turan
  * Author URI:   https://www.linkedin.com/in/mehdituran/
  * Text Domain:  jetprayer
@@ -19,7 +19,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 // Define plugin constants
-define( 'JETPRAYER_VERSION', '1.0.0' );
+define( 'JETPRAYER_VERSION', '1.0.1' );
 define( 'JETPRAYER_PATH', plugin_dir_path( __FILE__ ) );
 define( 'JETPRAYER_URL', plugin_dir_url( __FILE__ ) );
 define( 'JETPRAYER_BASENAME', plugin_basename( __FILE__ ) );

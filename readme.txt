@@ -3,7 +3,7 @@ Contributors: mehdituran
 Tags: prayer times, islamic, namaz, adhan, ezan
 Requires at least: 6.2
 Tested up to: 7.0
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -84,8 +84,15 @@ Yes! If you manually edit prayer times in the CRUD Database Editor, the row is m
 6. Slider layout – Slides through individual prayer times in a carousel.
 7. Ticker layout – Infinite marquee scrolling text displaying today's timings.
 8. Modal layout – Displays today's summary with a button to toggle the full monthly timetable modal.
+9. Backup page – Allows downloading a complete or partial JSON backup of the plugin settings, customization values, and timings.
 
 == Changelog ==
+
+= 1.0.1 =
+*   Added Backup tab to allow downloading Partial (settings, custom timings, and locations metadata) or Full (all timings cache) JSON backups.
+*   Implemented memory-safe Chunked Streaming architecture for Full Backups to prevent server timeouts and RAM limits.
+*   Added mobile responsive CSS overrides to keep layout width and centering stable on mobile devices, regardless of custom max-width settings.
+*   Added horizontal scroll support to monthly timetable modal on mobile screens.
 
 = 1.0.0 =
 *   Initial release. Features Card, Grid, Slider, Ticker, and Modal layouts.

@@ -252,6 +252,7 @@ $jp_display_layouts = array(
 		<a href="#settings-tab" class="nav-tab nav-tab-active" data-tab="settings"><?php esc_html_e( 'Settings & Sync', 'jetprayer' ); ?></a>
 		<a href="#editor-tab" class="nav-tab" data-tab="editor"><?php esc_html_e( 'Prayer Times Editor (CRUD)', 'jetprayer' ); ?></a>
 		<a href="#displays-tab" class="nav-tab" data-tab="displays"><?php esc_html_e( 'Displays', 'jetprayer' ); ?></a>
+		<a href="#backup-tab" class="nav-tab" data-tab="backup"><?php esc_html_e( 'Backup', 'jetprayer' ); ?></a>
 	</h2>
 
 	<div id="jetprayer-tab-settings" class="jetprayer-tab-content active">
@@ -713,6 +714,48 @@ $jp_display_layouts = array(
 					</form>
 				</div>
 			<?php endforeach; ?>
+		</div>
+	</div>
+
+	<div id="jetprayer-tab-backup" class="jetprayer-tab-content">
+		<div class="jetprayer-card">
+			<h2><?php esc_html_e( 'Eklenti Verilerini Yedekle', 'jetprayer' ); ?></h2>
+			<p class="description">
+				<?php esc_html_e( 'Eklenti ayarlarınızı, yerleşim tasarımlarınızı ve namaz vakitlerini harici bir JSON dosyası olarak yedekleyebilirsiniz.', 'jetprayer' ); ?>
+			</p>
+
+			<div class="jp-form-group" style="margin-top: 25px; max-width: 600px;">
+				<div class="jp-backup-options" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 25px;">
+					<h4 style="margin: 0 0 15px 0; font-size: 14px; font-weight: 600; color: #334155; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;"><?php esc_html_e( 'Yedekleme Türünü Seçin', 'jetprayer' ); ?></h4>
+					
+					<label style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px; cursor: pointer;">
+						<input type="radio" name="jp-backup-type" value="partial" checked style="margin-top: 3px;">
+						<div>
+							<strong style="color: #1e293b; font-size: 13.5px; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Kısmi Yedekleme (Önerilen)', 'jetprayer' ); ?></strong>
+							<span style="font-size: 12px; color: #64748b; line-height: 1.5; display: block;">
+								<?php esc_html_e( 'Sadece eklenti genel ayarlarını, yerleşim tasarımlarını (Displays), elle girilen özel vakitlerinizi ve senkronize edilmiş konum isimlerini yedekler. Saniyeler sürer, çok küçük boyutludur ve her sunucuda %100 sorunsuz çalışır.', 'jetprayer' ); ?>
+							</span>
+						</div>
+					</label>
+					
+					<hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 15px 0;">
+					
+					<label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;">
+						<input type="radio" name="jp-backup-type" value="full" style="margin-top: 3px;">
+						<div>
+							<strong style="color: #1e293b; font-size: 13.5px; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Tam Yedekleme (Büyük Veri)', 'jetprayer' ); ?></strong>
+							<span style="font-size: 12px; color: #64748b; line-height: 1.5; display: block;">
+								<?php esc_html_e( 'Kısmi yedekleme verilerine ek olarak veritabanında önbelleğe alınmış tüm namaz vakti kayıtlarını (10 binlerce satırı) yedekler. Çok büyük veritabanlarında sunucu zaman aşımı veya bellek yetersizliği limitlerine takılma riski barındırır.', 'jetprayer' ); ?>
+							</span>
+						</div>
+					</label>
+				</div>
+
+				<button type="button" id="jp-download-backup-btn" class="button button-primary jetprayer-btn" style="display: inline-flex; align-items: center; gap: 8px;">
+					<span class="dashicons dashicons-download jp-vertical-align-middle"></span>
+					<?php esc_html_e( 'Yedek Dosyasını İndir (JSON)', 'jetprayer' ); ?>
+				</button>
+			</div>
 		</div>
 	</div>
 

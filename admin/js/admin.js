@@ -1680,4 +1680,12 @@ jQuery( document ).ready( function ( $ ) {
 	$( '#jp_edit_city' ).on( 'change', function () {
 		populateEditMethods();
 	} );
+
+	// Backup tab download event handler
+	$( '#jp-download-backup-btn' ).on( 'click', function () {
+		const type =
+			$( 'input[name="jp-backup-type"]:checked' ).val() || 'partial';
+		window.location.href =
+			restUrl + '/backup?type=' + type + '&_wpnonce=' + restNonce;
+	} );
 } );

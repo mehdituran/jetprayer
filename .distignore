@@ -16,3 +16,4 @@ jetprayer.zip
 # Exclude custom local audio downloader script folder and downloaded files
 adh-mp3/
 adhan-audios/
+svn-checkout/
