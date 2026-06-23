@@ -266,6 +266,9 @@ $jp_display_layouts = array(
 						<?php esc_html_e( 'Bulk Add & Sync', 'jetprayer' ); ?>
 					</button>
 				</h2>
+				<p class="description" style="margin-top: -5px; margin-bottom: 20px;">
+					<?php esc_html_e( 'Define the primary default location and calculation options. The shortcode [jetprayer] will show this location by default. Syncing any location below saves it as the active default.', 'jetprayer' ); ?>
+				</p>
 				<form id="jetprayer-settings-form">
 					<div class="jp-form-group">
 						<label><?php esc_html_e( 'Location Method', 'jetprayer' ); ?></label>

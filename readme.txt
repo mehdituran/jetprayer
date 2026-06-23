@@ -74,6 +74,9 @@ The plugin features a 60-second rate limiter transient for the sync action. This
 = Are custom manual edits preserved during a sync? =
 Yes! If you manually edit prayer times in the CRUD Database Editor, the row is marked as `is_custom = 1`. During a normal API sync, custom rows are locked and will not be overwritten by AlAdhan API data, preserving your manual adjustments.
 
+= What is the default location and how do I change it? =
+The default location is the city/country or coordinates configured and last synced in the "Settings & Sync" dashboard. This is saved as the default options values in the database, and the shortcode `[jetprayer]` will display this location by default. If you sync multiple locations, you can change the default location anytime by entering its details in the settings form and clicking "Sync".
+
 == Screenshots ==
 
 1. Settings & Sync configuration page – Allows setting the location (City/Country or Coordinates), choosing calculation methods, and triggering database synchronization.

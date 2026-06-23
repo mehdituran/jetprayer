@@ -31,3 +31,6 @@ adhan-audios/
 # SVN temporary checkout
 svn-checkout/
 
+# Backups
+jetprayer-backup-*.json
+
