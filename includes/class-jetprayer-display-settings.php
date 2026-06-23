@@ -32,20 +32,6 @@ class JetPrayer_Display_Settings {
 			'show_isha'    => true,
 		);
 
-		$card_colors = array(
-			'bg_color'        => '#0f172a',
-			'border_color'    => '#ffffff',
-			'radius'          => 16,
-			'location_color'  => '#ffffff',
-			'hijri_color'     => '#0ea5e9',
-			'gregorian_color' => '#94a3b8',
-			'label_color'     => '#ffffff',
-			'time_color'      => '#ffffff',
-			'next_color'      => '#0ea5e9',
-			'name_bg_color'   => '#1e293b',
-			'time_bg_color'   => '#1e293b',
-		);
-
 		$card_advanced = array(
 			'name_size'      => '14px',
 			'name_weight'    => '600',
@@ -110,7 +96,6 @@ class JetPrayer_Display_Settings {
 					'show_next_badge'  => true,
 				),
 				$prayer_toggles,
-				$card_colors,
 				$card_advanced
 			),
 			'grid'   => array_merge(
@@ -120,16 +105,6 @@ class JetPrayer_Display_Settings {
 					'show_next_badge' => true,
 				),
 				$prayer_toggles,
-				array(
-					'bg_color'       => '#0f172a',
-					'border_color'   => '#ffffff',
-					'radius'         => 12,
-					'location_color' => '#ffffff',
-					'hijri_color'    => '#0ea5e9',
-					'label_color'    => '#94a3b8',
-					'time_color'     => '#ffffff',
-					'next_color'     => '#0ea5e9',
-				),
 				$grid_advanced
 			),
 			'slider' => array_merge(
@@ -138,15 +113,6 @@ class JetPrayer_Display_Settings {
 					'show_next_badge' => true,
 				),
 				$prayer_toggles,
-				array(
-					'bg_color'       => '#0f172a',
-					'border_color'   => '#ffffff',
-					'radius'         => 12,
-					'location_color' => '#ffffff',
-					'label_color'    => '#94a3b8',
-					'time_color'     => '#ffffff',
-					'next_color'     => '#0ea5e9',
-				),
 				$slider_advanced
 			),
 			'ticker' => array_merge(
@@ -154,15 +120,7 @@ class JetPrayer_Display_Settings {
 					'show_location' => true,
 					'show_hijri'    => true,
 				),
-				$prayer_toggles,
-				array(
-					'bg_color'         => '#0f172a',
-					'border_color'     => '#ffffff',
-					'radius'           => 8,
-					'title_bg_color'   => '#0ea5e9',
-					'title_text_color' => '#ffffff',
-					'text_color'       => '#ffffff',
-				)
+				$prayer_toggles
 			),
 			'modal'  => array_merge(
 				array(
@@ -172,17 +130,7 @@ class JetPrayer_Display_Settings {
 					'show_next_badge' => true,
 				),
 				$prayer_toggles,
-				$card_colors,
-				$card_advanced,
-				array(
-					'trigger_btn_bg'           => '#0ea5e9',
-					'trigger_btn_text'         => '#ffffff',
-					'box_bg'                   => '#1e293b',
-					'box_border_color'         => '#ffffff',
-					'box_radius'               => 16,
-					'table_header_color'       => '#94a3b8',
-					'table_today_highlight_color' => '#0ea5e9',
-				)
+				$card_advanced
 			),
 		);
 	}

@@ -529,6 +529,8 @@
 .jp-modal-body {
 	padding: 20px;
 	overflow-y: auto;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
 	flex: 1;
 }
 
@@ -762,3 +764,22 @@
 .jp-next-badge.hidden, .jp-next-indicator.hidden, .hidden {
 	display: none !important;
 }
+
+@media (max-width: 480px) {
+	.jp-container {
+		width: calc(100% - 32px) !important;
+		max-width: 100% !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+		padding: 16px 12px !important;
+	}
+	.jp-prayer-name {
+		padding: 10px 10px !important;
+		font-size: 13px !important;
+	}
+	.jp-prayer-time {
+		padding: 10px 10px !important;
+		font-size: 14px !important;
+	}
+}
+

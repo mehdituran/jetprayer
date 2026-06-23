@@ -63,21 +63,6 @@ $jp_display_layouts = array(
 			),
 			$jp_prayer_toggles
 		),
-		'colors'  => array(
-			'bg_color'        => __( 'Background Color', 'jetprayer' ),
-			'border_color'    => __( 'Border Color', 'jetprayer' ),
-			'location_color'  => __( 'Location Text Color', 'jetprayer' ),
-			'hijri_color'     => __( 'Hijri Date Color', 'jetprayer' ),
-			'gregorian_color' => __( 'Gregorian Date Color', 'jetprayer' ),
-			'label_color'     => __( 'Prayer Name Color', 'jetprayer' ),
-			'time_color'      => __( 'Prayer Time Color', 'jetprayer' ),
-			'next_color'      => __( '"Next" Accent Color', 'jetprayer' ),
-			'name_bg_color'   => __( 'Prayer Name Box Background', 'jetprayer' ),
-			'time_bg_color'   => __( 'Prayer Time Box Background', 'jetprayer' ),
-		),
-		'ranges'  => array(
-			'radius' => __( 'Corner Radius', 'jetprayer' ),
-		),
 		'advanced_css' => array(
 			'layout' => array(
 				'title'  => __( 'Layout Settings', 'jetprayer' ),
@@ -127,18 +112,6 @@ $jp_display_layouts = array(
 			),
 			$jp_prayer_toggles
 		),
-		'colors'  => array(
-			'bg_color'       => __( 'Background Color', 'jetprayer' ),
-			'border_color'   => __( 'Border Color', 'jetprayer' ),
-			'location_color' => __( 'Location Text Color', 'jetprayer' ),
-			'hijri_color'    => __( 'Hijri Date Color', 'jetprayer' ),
-			'label_color'    => __( 'Prayer Name Color', 'jetprayer' ),
-			'time_color'     => __( 'Prayer Time Color', 'jetprayer' ),
-			'next_color'     => __( '"Next" Accent Color', 'jetprayer' ),
-		),
-		'ranges'  => array(
-			'radius' => __( 'Corner Radius', 'jetprayer' ),
-		),
 		'advanced_css' => array(
 			'layout' => array(
 				'title'  => __( 'Layout Settings', 'jetprayer' ),
@@ -176,17 +149,6 @@ $jp_display_layouts = array(
 			),
 			$jp_prayer_toggles
 		),
-		'colors'  => array(
-			'bg_color'       => __( 'Background Color', 'jetprayer' ),
-			'border_color'   => __( 'Border Color', 'jetprayer' ),
-			'location_color' => __( 'Location Text Color', 'jetprayer' ),
-			'label_color'    => __( 'Prayer Name Color', 'jetprayer' ),
-			'time_color'     => __( 'Prayer Time Color', 'jetprayer' ),
-			'next_color'     => __( '"Next" Accent Color', 'jetprayer' ),
-		),
-		'ranges'  => array(
-			'radius' => __( 'Corner Radius', 'jetprayer' ),
-		),
 		'advanced_css' => array(
 			'layout' => array(
 				'title'  => __( 'Layout Settings', 'jetprayer' ),
@@ -223,16 +185,6 @@ $jp_display_layouts = array(
 			),
 			$jp_prayer_toggles
 		),
-		'colors'  => array(
-			'bg_color'         => __( 'Background Color', 'jetprayer' ),
-			'border_color'     => __( 'Border Color', 'jetprayer' ),
-			'title_bg_color'   => __( 'Location Badge Background', 'jetprayer' ),
-			'title_text_color' => __( 'Location Badge Text Color', 'jetprayer' ),
-			'text_color'       => __( 'Scrolling Text Color', 'jetprayer' ),
-		),
-		'ranges'  => array(
-			'radius' => __( 'Corner Radius', 'jetprayer' ),
-		),
 	),
 	'modal'  => array(
 		'label'   => __( 'Modal', 'jetprayer' ),
@@ -244,28 +196,6 @@ $jp_display_layouts = array(
 				'show_next_badge' => __( '"Next" Badge', 'jetprayer' ),
 			),
 			$jp_prayer_toggles
-		),
-		'colors'  => array(
-			'bg_color'                    => __( 'Mini-Card Background', 'jetprayer' ),
-			'border_color'                => __( 'Mini-Card Border Color', 'jetprayer' ),
-			'location_color'               => __( 'Location Text Color', 'jetprayer' ),
-			'hijri_color'                  => __( 'Hijri Date Color', 'jetprayer' ),
-			'gregorian_color'              => __( 'Gregorian Date Color', 'jetprayer' ),
-			'label_color'                  => __( 'Prayer Name Color', 'jetprayer' ),
-			'time_color'                   => __( 'Prayer Time Color', 'jetprayer' ),
-			'next_color'                   => __( '"Next" Accent Color', 'jetprayer' ),
-			'name_bg_color'                => __( 'Prayer Name Box Background', 'jetprayer' ),
-			'time_bg_color'                => __( 'Prayer Time Box Background', 'jetprayer' ),
-			'trigger_btn_bg'               => __( 'Trigger Button Background', 'jetprayer' ),
-			'trigger_btn_text'             => __( 'Trigger Button Text Color', 'jetprayer' ),
-			'box_bg'                       => __( 'Popup Background', 'jetprayer' ),
-			'box_border_color'             => __( 'Popup Border Color', 'jetprayer' ),
-			'table_header_color'           => __( 'Table Header Text Color', 'jetprayer' ),
-			'table_today_highlight_color'  => __( "Today's Row Accent Color", 'jetprayer' ),
-		),
-		'ranges'  => array(
-			'radius'     => __( 'Mini-Card Corner Radius', 'jetprayer' ),
-			'box_radius' => __( 'Popup Corner Radius', 'jetprayer' ),
 		),
 		'advanced_css' => array(
 			'layout' => array(
@@ -659,7 +589,7 @@ $jp_display_layouts = array(
 		<div class="jetprayer-card">
 			<h2><?php esc_html_e( 'Layout Display Settings', 'jetprayer' ); ?></h2>
 			<p class="description">
-				<?php esc_html_e( 'Toggle which elements are visible and customize the colors, border and corner radius for each shortcode layout. Changes apply site-wide to every use of that layout.', 'jetprayer' ); ?>
+				<?php esc_html_e( 'Toggle which elements are visible for each shortcode layout. Changes apply site-wide to every use of that layout.', 'jetprayer' ); ?>
 			</p>
 
 			<div class="jetprayer-display-subtabs">
@@ -686,23 +616,7 @@ $jp_display_layouts = array(
 							</div>
 						</div>
 
-						<div class="jp-display-section">
-							<h3><?php esc_html_e( 'Colors & Style', 'jetprayer' ); ?></h3>
-							<div class="jp-form-row">
-								<?php foreach ( $jp_layout_conf['colors'] as $jp_field => $jp_field_label ) : ?>
-									<div class="jp-form-group jp-col-4">
-										<label><?php echo esc_html( $jp_field_label ); ?></label>
-										<input type="text" class="jp-color-field" name="<?php echo esc_attr( $jp_field ); ?>" value="<?php echo esc_attr( isset( $jp_current[ $jp_field ] ) ? $jp_current[ $jp_field ] : '' ); ?>">
-									</div>
-								<?php endforeach; ?>
-								<?php foreach ( $jp_layout_conf['ranges'] as $jp_field => $jp_field_label ) : ?>
-									<div class="jp-form-group jp-col-4">
-										<label><?php echo esc_html( $jp_field_label ); ?> (<span class="jp-range-value"><?php echo esc_html( isset( $jp_current[ $jp_field ] ) ? $jp_current[ $jp_field ] : 0 ); ?></span>px)</label>
-										<input type="range" class="jp-range-field" name="<?php echo esc_attr( $jp_field ); ?>" min="0" max="50" value="<?php echo esc_attr( isset( $jp_current[ $jp_field ] ) ? $jp_current[ $jp_field ] : 0 ); ?>">
-									</div>
-								<?php endforeach; ?>
-							</div>
-						</div>
+
 
 						<?php if ( ! empty( $jp_layout_conf['advanced_css'] ) ) : ?>
 						<div class="jp-display-section jp-advanced-section" style="border-top: 1px solid #e2e8f0; margin-top: 30px; padding-top: 20px;">

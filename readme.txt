@@ -25,8 +25,8 @@ This plugin relies on the external, 3rd party service **AlAdhan API** to fetch a
 ### Features
 *   **0ms Latency Caching**: The plugin works entirely offline on the frontend, retrieving values from a dedicated database table.
 *   **5 Gorgeous Layouts**: Select between Card, Grid, Slider, Ticker, and Trigger Modal layouts.
-*   **Full Customization (Displays Tab)**: Dynamically toggle prayer rows, change colors, adjust backgrounds, and customize border-radius separately for each layout.
-*   **WordPress Color Picker Integration**: Utilizes native WordPress colors picker in the admin panel.
+*   **Full Customization (Displays Tab)**: Dynamically toggle prayer rows and customize layout dimensions, text alignments, padding, margins, ratios, and font-families separately for each layout.
+*   **Auto-Detect & Country-Grouped Switcher**: Dynamically group synced cities by country in frontend dropdowns. Automatically resolves calculations for identical cities under different timing methods (e.g. Istanbul Diyanet vs. Istanbul MWL) and uses visitor IP geolocation to auto-select the closest synced city based on distance.
 *   **Timetable CRUD Editor**: Manually view, edit, or customize individual prayer timings day-by-day directly in the database manager.
 *   **AlAdhan API Sync**: Sync location-based calculation methods (including Diyanet Turkey, Shia Jafari, Makkah, ISNA, and more).
 *   **Gutenberg Block & Elementor Widget Integration**: Drag-and-drop the JetPrayer block (Gutenberg) or the native "JetPrayer - Prayer Times" widget (Elementor) into your editor, or use standard shortcodes.
@@ -78,14 +78,20 @@ Yes! If you manually edit prayer times in the CRUD Database Editor, the row is m
 
 1. Settings & Sync configuration page – Allows setting the location (City/Country or Coordinates), choosing calculation methods, and triggering database synchronization.
 2. Timetable CRUD Editor page – Displays cached database rows month-by-month with options to edit timings, delete entries, and search records.
-3. Layout Display Settings page – Exposes full layout customization options including visibility toggles, colors, corner radius, and advanced CSS controls.
+3. Layout Display Settings page – Exposes layout customization options including visibility toggles and advanced CSS controls (max width, text alignment, margins, paddings, ratios, and font families).
+4. Card layout – Exposes prayer times inside a premium, glassmorphic card design.
+5. Grid layout – Displays prayer times side-by-side in a responsive grid.
+6. Slider layout – Slides through individual prayer times in a carousel.
+7. Ticker layout – Infinite marquee scrolling text displaying today's timings.
+8. Modal layout – Displays today's summary with a button to toggle the full monthly timetable modal.
 
 == Changelog ==
 
 = 1.0.0 =
 *   Initial release. Features Card, Grid, Slider, Ticker, and Modal layouts.
 *   Includes Settings & Sync panel with AlAdhan API sync and 60-second rate limit protection.
-*   Displays tab allowing full color, layout toggles, and border-radius customization.
+*   Displays tab allowing layout toggles, visibility controls, and advanced CSS customization.
+*   Country-grouped frontend switcher with automatic IP distance-based closest location auto-detection.
 *   Timetable CRUD Editor Database Manager with custom row locks on sync.
 *   Gutenberg Block, native Elementor widget, and responsive shortcode implementations.
 *   REST API timings endpoints optimized with recursive UTF-8 sanitization and exception-safe try/catch handlers.

@@ -779,17 +779,6 @@ class JetPrayer_Shortcodes {
 	 */
 	private function get_override_map() {
 		$card_vars = array(
-			'--jp-layout-bg'        => 'bg_color',
-			'--jp-layout-border'    => 'border_color',
-			'--jp-layout-radius'    => 'radius:px',
-			'--jp-location-color'   => 'location_color',
-			'--jp-hijri-color'      => 'hijri_color',
-			'--jp-greg-color'       => 'gregorian_color',
-			'--jp-label-color'      => 'label_color',
-			'--jp-time-color'       => 'time_color',
-			'--jp-next-color'       => 'next_color',
-			'--jp-name-bg'          => 'name_bg_color',
-			'--jp-time-bg'          => 'time_bg_color',
 			'--jp-name-size'        => 'name_size',
 			'--jp-name-weight'      => 'name_weight',
 			'--jp-name-padding'     => 'name_padding',
@@ -813,14 +802,6 @@ class JetPrayer_Shortcodes {
 			),
 			'grid'   => array(
 				'.jp-grid-layout' => array(
-					'--jp-layout-bg'        => 'bg_color',
-					'--jp-layout-border'    => 'border_color',
-					'--jp-layout-radius'    => 'radius:px',
-					'--jp-location-color'   => 'location_color',
-					'--jp-hijri-color'      => 'hijri_color',
-					'--jp-label-color'      => 'label_color',
-					'--jp-time-color'       => 'time_color',
-					'--jp-next-color'       => 'next_color',
 					'--jp-name-size'        => 'name_size',
 					'--jp-name-weight'      => 'name_weight',
 					'--jp-name-padding'     => 'name_padding',
@@ -840,13 +821,6 @@ class JetPrayer_Shortcodes {
 			),
 			'slider' => array(
 				'.jp-slider-layout' => array(
-					'--jp-layout-bg'        => 'bg_color',
-					'--jp-layout-border'    => 'border_color',
-					'--jp-layout-radius'    => 'radius:px',
-					'--jp-location-color'   => 'location_color',
-					'--jp-label-color'      => 'label_color',
-					'--jp-time-color'       => 'time_color',
-					'--jp-next-color'       => 'next_color',
 					'--jp-name-size'        => 'name_size',
 					'--jp-name-weight'      => 'name_weight',
 					'--jp-name-padding'     => 'name_padding',
@@ -864,33 +838,9 @@ class JetPrayer_Shortcodes {
 					'--jp-layout-max-width' => 'layout_max_width',
 				),
 			),
-			'ticker' => array(
-				'.jp-ticker-layout' => array(
-					'--jp-ticker-bg'         => 'bg_color',
-					'--jp-ticker-border'     => 'border_color',
-					'--jp-ticker-radius'     => 'radius:px',
-					'--jp-ticker-title-bg'   => 'title_bg_color',
-					'--jp-ticker-title-color' => 'title_text_color',
-					'--jp-ticker-text-color' => 'text_color',
-				),
-			),
+			'ticker' => array(),
 			'modal'  => array(
 				'.jp-modal-mini-card' => $card_vars,
-				'.jp-modal-open-btn'  => array(
-					'--jp-modal-trigger-bg'    => 'trigger_btn_bg',
-					'--jp-modal-trigger-color' => 'trigger_btn_text',
-				),
-				'.jp-modal-box' => array(
-					'--jp-modal-box-bg'     => 'box_bg',
-					'--jp-modal-box-border' => 'box_border_color',
-					'--jp-modal-box-radius' => 'box_radius:px',
-				),
-				'.jp-modal-table th' => array(
-					'--jp-modal-table-header-color' => 'table_header_color',
-				),
-				'.jp-modal-table tr.jp-modal-today-row' => array(
-					'--jp-modal-today-color' => 'table_today_highlight_color',
-				),
 			),
 		);
 	}
