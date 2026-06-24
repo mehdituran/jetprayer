@@ -3,7 +3,7 @@ Contributors: mehdituran
 Tags: prayer times, islamic, namaz, adhan, ezan
 Requires at least: 6.2
 Tested up to: 7.0
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -98,6 +98,12 @@ The plugin will download and cache all timings sequentially with real-time progr
 9. Backup page – Allows downloading a complete or partial JSON backup of the plugin settings, customization values, and timings.
 
 == Changelog ==
+
+= 1.0.2 =
+*   Fixed Display settings bug where font-weight values (like 600, 700) were clamped to 100 on sanitization.
+*   Reduced container padding and margins on mobile to 5px for better mobile screen space utilization.
+*   Added Upgrade to Pro tab in plugin settings page outlining premium features and direct customer support.
+*   Fixed CSS empty spacing/gaps in headers when Hijri and Gregorian dates are toggled off.
 
 = 1.0.1 =
 *   Added Backup tab to allow downloading Partial (settings, custom timings, and locations metadata) or Full (all timings cache) JSON backups.

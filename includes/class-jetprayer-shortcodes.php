@@ -513,6 +513,8 @@ class JetPrayer_Shortcodes {
 		$wrapper_class = 'jp-container jp-card-layout' . ( $extra_class ? ' ' . $extra_class : '' );
 		$show_header   = ! empty( $settings['show_location'] ) || ! empty( $settings['show_hijri'] ) || ! empty( $settings['show_gregorian'] ) || ! empty( $switcher_html );
 		$data_method   = ( null !== $method_id && '' !== $method_id ) ? $method_id : $timings['method_id'];
+		$has_dates     = ! empty( $settings['show_hijri'] ) || ! empty( $settings['show_gregorian'] );
+		$header_class  = 'jp-header' . ( ! $has_dates ? ' jp-header-no-dates' : '' );
 		?>
 		<div class="<?php echo esc_attr( $wrapper_class ); ?>"
 			data-layout="card"
@@ -521,7 +523,7 @@ class JetPrayer_Shortcodes {
 			data-method="<?php echo esc_attr( $data_method ); ?>"
 			data-date="<?php echo esc_attr( $timings['prayer_date'] ); ?>">
 			<?php if ( $show_header ) : ?>
-			<div class="jp-header">
+			<div class="<?php echo esc_attr( $header_class ); ?>">
 				<?php if ( ! empty( $switcher_html ) ) : ?>
 					<div class="jp-switcher-title-wrapper">
 						<?php echo wp_kses( $switcher_html, $this->get_switcher_allowed_html() ); ?>
@@ -564,6 +566,8 @@ class JetPrayer_Shortcodes {
 	private function render_grid_layout( $prayers_list, $timings, $next_prayer_key, $location_name, $settings, $switcher_html = '', $method_id = '' ) {
 		$show_header = ! empty( $settings['show_location'] ) || ! empty( $settings['show_hijri'] ) || ! empty( $switcher_html );
 		$data_method = ( null !== $method_id && '' !== $method_id ) ? $method_id : $timings['method_id'];
+		$has_dates   = ! empty( $settings['show_hijri'] );
+		$header_class = 'jp-header' . ( ! $has_dates ? ' jp-header-no-dates' : '' );
 		?>
 		<div class="jp-container jp-grid-layout"
 			data-layout="grid"
@@ -572,7 +576,7 @@ class JetPrayer_Shortcodes {
 			data-method="<?php echo esc_attr( $data_method ); ?>"
 			data-date="<?php echo esc_attr( $timings['prayer_date'] ); ?>">
 			<?php if ( $show_header ) : ?>
-			<div class="jp-header">
+			<div class="<?php echo esc_attr( $header_class ); ?>">
 				<?php if ( ! empty( $switcher_html ) ) : ?>
 					<div class="jp-switcher-title-wrapper">
 						<?php echo wp_kses( $switcher_html, $this->get_switcher_allowed_html() ); ?>

@@ -209,12 +209,19 @@ class JetPrayer_Display_Settings {
 				} else {
 					$sanitized[ $key ] = in_array( $incoming, array( true, 1, '1', 'true', 'on' ), true );
 				}
+			} elseif ( strpos( $key, 'font' ) !== false || strpos( $key, 'size' ) !== false || strpos( $key, 'padding' ) !== false || strpos( $key, 'margin' ) !== false || strpos( $key, 'weight' ) !== false || strpos( $key, 'align' ) !== false || strpos( $key, 'width' ) !== false || strpos( $key, 'ratio' ) !== false || strpos( $key, 'shadow' ) !== false ) {
+				// Advanced CSS text fields. Checked before the is_numeric()
+				// branch below on purpose: "*_weight" defaults are numeric-
+				// looking strings ('600', '700'...), and is_numeric('600') is
+				// true in PHP, so that branch would otherwise catch them first
+				// and clamp them into 0-100 (meant for radius/range sliders,
+				// not CSS font-weight 100-900) - silently rewriting every
+				// weight choice to 100 regardless of what was picked, which is
+				// why the setting looked like it never changed.
+				$sanitized[ $key ] = null !== $incoming ? sanitize_text_field( $incoming ) : $default_value;
 			} elseif ( is_numeric( $default_value ) ) {
 				// Numeric field, clamped.
 				$sanitized[ $key ] = null !== $incoming ? max( 0, min( 100, intval( $incoming ) ) ) : $default_value;
-			} elseif ( strpos( $key, 'font' ) !== false || strpos( $key, 'size' ) !== false || strpos( $key, 'padding' ) !== false || strpos( $key, 'margin' ) !== false || strpos( $key, 'weight' ) !== false || strpos( $key, 'align' ) !== false || strpos( $key, 'width' ) !== false || strpos( $key, 'ratio' ) !== false ) {
-				// Advanced CSS text fields
-				$sanitized[ $key ] = null !== $incoming ? sanitize_text_field( $incoming ) : $default_value;
 			} else {
 				// Color field.
 				$color = is_string( $incoming ) ? sanitize_hex_color( $incoming ) : '';

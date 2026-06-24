@@ -253,6 +253,10 @@ $jp_display_layouts = array(
 		<a href="#editor-tab" class="nav-tab" data-tab="editor"><?php esc_html_e( 'Prayer Times Editor (CRUD)', 'jetprayer' ); ?></a>
 		<a href="#displays-tab" class="nav-tab" data-tab="displays"><?php esc_html_e( 'Displays', 'jetprayer' ); ?></a>
 		<a href="#backup-tab" class="nav-tab" data-tab="backup"><?php esc_html_e( 'Backup', 'jetprayer' ); ?></a>
+		<a href="#pro-tab" class="nav-tab nav-tab-pro" data-tab="pro" style="color: #0284c7; font-weight: bold; display: inline-flex; align-items: center; gap: 4px;">
+			<span class="dashicons dashicons-star-filled" style="color: #f59e0b; font-size: 17px; width: 17px; height: 17px; margin-top: -2px;"></span>
+			<?php esc_html_e( 'Upgrade to Pro', 'jetprayer' ); ?>
+		</a>
 	</h2>
 
 	<div id="jetprayer-tab-settings" class="jetprayer-tab-content active">
@@ -759,6 +763,367 @@ $jp_display_layouts = array(
 					<?php esc_html_e( 'Download Backup File (JSON)', 'jetprayer' ); ?>
 				</button>
 			</div>
+		</div>
+	</div>
+
+	<style>
+		.jp-pro-tab-container {
+			max-width: 1000px;
+			margin-top: 20px;
+		}
+		.jp-pro-hero {
+			background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+			color: #ffffff;
+			padding: 35px;
+			border-radius: 12px;
+			margin-bottom: 30px;
+			position: relative;
+			overflow: hidden;
+			box-shadow: 0 10px 15px -3px rgba(14, 165, 233, 0.15), 0 4px 6px -2px rgba(14, 165, 233, 0.1);
+		}
+		.jp-pro-hero::before {
+			content: "";
+			position: absolute;
+			top: -40%;
+			right: -10%;
+			width: 250px;
+			height: 250px;
+			background: rgba(255, 255, 255, 0.08);
+			border-radius: 50%;
+			pointer-events: none;
+		}
+		.jp-pro-hero-content {
+			max-width: 680px;
+			position: relative;
+			z-index: 2;
+		}
+		.jp-pro-hero h2 {
+			color: #ffffff !important;
+			font-size: 26px !important;
+			font-weight: 800 !important;
+			margin: 0 0 10px 0 !important;
+			border-bottom: none !important;
+			padding: 0 !important;
+			letter-spacing: -0.5px;
+		}
+		.jp-pro-hero p {
+			font-size: 15px;
+			line-height: 1.6;
+			margin: 0 0 25px 0;
+			opacity: 0.95;
+		}
+		.jp-pro-cta-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			background: #ffffff;
+			color: #0369a1 !important;
+			padding: 12px 24px;
+			border-radius: 8px;
+			font-weight: 700;
+			font-size: 14.5px;
+			text-decoration: none !important;
+			box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+			transition: all 0.2s ease;
+		}
+		.jp-pro-cta-btn:hover {
+			background: #f8fafc;
+			transform: translateY(-2px);
+			box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+		}
+		.jp-pro-features-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: 20px;
+			margin-bottom: 35px;
+		}
+		.jp-pro-feature-card {
+			background: #ffffff;
+			border: 1px solid #e2e8f0;
+			border-radius: 10px;
+			padding: 22px;
+			transition: all 0.2s ease;
+			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+			box-sizing: border-box;
+		}
+		.jp-pro-feature-card:hover {
+			border-color: #0ea5e9;
+			box-shadow: 0 4px 20px -2px rgba(14, 165, 233, 0.08);
+			transform: translateY(-2px);
+		}
+		.jp-pro-feature-icon {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 44px;
+			height: 44px;
+			background: #f0f9ff;
+			color: #0284c7;
+			border-radius: 8px;
+			margin-bottom: 15px;
+		}
+		.jp-pro-feature-icon .dashicons {
+			font-size: 22px;
+			width: 22px;
+			height: 22px;
+		}
+		.jp-pro-feature-card h3 {
+			margin: 0 0 8px 0;
+			font-size: 15px;
+			font-weight: 700;
+			color: #1e293b;
+		}
+		.jp-pro-feature-card p {
+			margin: 0;
+			font-size: 13px;
+			line-height: 1.5;
+			color: #64748b;
+		}
+		.jp-pro-table-card {
+			background: #ffffff;
+			border: 1px solid #e2e8f0;
+			border-radius: 10px;
+			padding: 25px;
+			margin-bottom: 35px;
+			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+		}
+		.jp-pro-table-card h3 {
+			margin: 0 0 20px 0;
+			font-size: 17px;
+			font-weight: 700;
+			color: #1e293b;
+			border-bottom: 1px solid #f1f5f9;
+			padding-bottom: 10px;
+		}
+		.jp-pro-table {
+			width: 100%;
+			border-collapse: collapse;
+			text-align: left;
+		}
+		.jp-pro-table th {
+			padding: 12px 16px;
+			font-size: 13px;
+			font-weight: 700;
+			color: #475569;
+			border-bottom: 2px solid #e2e8f0;
+			background: #f8fafc;
+		}
+		.jp-pro-table td {
+			padding: 14px 16px;
+			font-size: 13px;
+			border-bottom: 1px solid #f1f5f9;
+			color: #475569;
+		}
+		.jp-pro-table tbody tr:hover {
+			background: #f8fafc;
+		}
+		.jp-pro-table td.jp-pro-feature-col {
+			font-weight: 600;
+			color: #1e293b;
+		}
+		.jp-pro-table td.jp-pro-free-col {
+			color: #64748b;
+		}
+		.jp-pro-table td.jp-pro-val-col {
+			font-weight: 500;
+		}
+		.jp-pro-check-icon {
+			color: #10b981;
+			font-size: 16px;
+			font-weight: bold;
+		}
+		.jp-pro-cross-icon {
+			color: #ef4444;
+			font-size: 16px;
+			font-weight: bold;
+		}
+		.jp-pro-footer-cta {
+			background: #f8fafc;
+			border: 1px solid #e2e8f0;
+			border-radius: 10px;
+			padding: 30px;
+			text-align: center;
+			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+		}
+		.jp-pro-footer-cta h3 {
+			margin: 0 0 8px 0;
+			font-size: 19px;
+			font-weight: 800;
+			color: #1e293b;
+		}
+		.jp-pro-footer-cta p {
+			margin: 0 0 22px 0;
+			font-size: 14px;
+			color: #64748b;
+		}
+		.jp-pro-footer-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			background: #0ea5e9;
+			color: #ffffff !important;
+			padding: 14px 32px;
+			border-radius: 8px;
+			font-weight: 700;
+			font-size: 15px;
+			text-decoration: none !important;
+			box-shadow: 0 4px 6px -1px rgba(14, 165, 233, 0.2);
+			transition: all 0.2s ease;
+		}
+		.jp-pro-footer-btn:hover {
+			background: #0284c7;
+			transform: translateY(-2px);
+			box-shadow: 0 10px 15px -3px rgba(14, 165, 233, 0.3);
+		}
+	</style>
+
+	<div id="jetprayer-tab-pro" class="jetprayer-tab-content">
+		<div class="jp-pro-tab-container">
+			
+			<!-- Hero Banner -->
+			<div class="jp-pro-hero">
+				<div class="jp-pro-hero-content">
+					<h2><?php esc_html_e( 'Unlock the Full Power of JetPrayer Pro', 'jetprayer' ); ?></h2>
+					<p>
+						<?php esc_html_e( 'Upgrade to the Pro edition today to unlock advanced location detection, complete visual style controls, bulk data maintenance tools, custom prayer labels, and direct priority email support.', 'jetprayer' ); ?>
+					</p>
+					<a href="https://jetreader.lemonsqueezy.com/" target="_blank" class="jp-pro-cta-btn">
+						<span class="dashicons dashicons-cart jp-vertical-align-middle"></span>
+						<?php esc_html_e( 'Upgrade to Pro Now', 'jetprayer' ); ?>
+					</a>
+				</div>
+			</div>
+
+			<!-- Grid of Features -->
+			<div class="jp-pro-features-grid">
+				
+				<!-- Feature 1 -->
+				<div class="jp-pro-feature-card">
+					<div class="jp-pro-feature-icon">
+						<span class="dashicons dashicons-location-alt"></span>
+					</div>
+					<h3><?php esc_html_e( 'Auto-Detect Visitor Location (GeoIP)', 'jetprayer' ); ?></h3>
+					<p>
+						<?php esc_html_e( 'Automatically pre-select the nearest synced city based on the visitor\'s IP address (via client-side ipapi.co query). Perfect for sites showing multiple cities. Can also be overridden per shortcode via auto_detect="true" or "false".', 'jetprayer' ); ?>
+					</p>
+				</div>
+
+				<!-- Feature 2 -->
+				<div class="jp-pro-feature-card">
+					<div class="jp-pro-feature-icon">
+						<span class="dashicons dashicons-art"></span>
+					</div>
+					<h3><?php esc_html_e( 'Advanced Colors & Visual Styles', 'jetprayer' ); ?></h3>
+					<p>
+						<?php esc_html_e( 'Customize layouts directly in the dashboard! Control background color, border color, text colors (location, Hijri, Gregorian, prayer name, prayer time), "Next" prayer accent color, box backgrounds, and corner radius without writing a single line of CSS.', 'jetprayer' ); ?>
+					</p>
+				</div>
+
+				<!-- Feature 3 -->
+				<div class="jp-pro-feature-card">
+					<div class="jp-pro-feature-icon">
+						<span class="dashicons dashicons-editor-textcolor"></span>
+					</div>
+					<h3><?php esc_html_e( 'Custom Prayer Name Labels', 'jetprayer' ); ?></h3>
+					<p>
+						<?php esc_html_e( 'Rename prayer times (Fajr, Dhuhr, Asr, Maghrib, Isha, Imsak, Sunrise) globally to match your regional language preferences (e.g. Ezan/Namaz terms) directly under the Displays settings tab.', 'jetprayer' ); ?>
+					</p>
+				</div>
+
+				<!-- Feature 4 -->
+				<div class="jp-pro-feature-card">
+					<div class="jp-pro-feature-icon">
+						<span class="dashicons dashicons-admin-tools"></span>
+					</div>
+					<h3><?php esc_html_e( 'Powerful Bulk Data Tools', 'jetprayer' ); ?></h3>
+					<p>
+						<?php esc_html_e( 'Bulk rename countries or cities, mass-translate Hijri month names, and apply minute offsets (+/-) to specific prayers across entire months or years in seconds rather than manual row editing in the Editor tab.', 'jetprayer' ); ?>
+					</p>
+				</div>
+
+				<!-- Feature 5 -->
+				<div class="jp-pro-feature-card">
+					<div class="jp-pro-feature-icon">
+						<span class="dashicons dashicons-backup"></span>
+					</div>
+					<h3><?php esc_html_e( 'Safe JSON Restore Option', 'jetprayer' ); ?></h3>
+					<p>
+						<?php esc_html_e( 'Directly import and restore your layouts, settings, manual customizations, and synced database records using downloaded backup JSON files safely in one click.', 'jetprayer' ); ?>
+					</p>
+				</div>				<!-- Feature 6 -->
+				<div class="jp-pro-feature-card">
+					<div class="jp-pro-feature-icon">
+						<span class="dashicons dashicons-email"></span>
+					</div>
+					<h3><?php esc_html_e( 'Premium Customer Support', 'jetprayer' ); ?></h3>
+					<p>
+						<?php esc_html_e( 'Receive direct priority email support from the plugin developers to help with any layout customization questions, technical queries, or configuration issues.', 'jetprayer' ); ?>
+					</p>
+				</div>
+
+			</div>
+
+			<!-- Comparison Table -->
+			<div class="jp-pro-table-card">
+				<h3><?php esc_html_e( 'Compare Free vs. Pro Features', 'jetprayer' ); ?></h3>
+				<table class="jp-pro-table">
+					<thead>
+						<tr>
+							<th><?php esc_html_e( 'Feature', 'jetprayer' ); ?></th>
+							<th><?php esc_html_e( 'Free Edition', 'jetprayer' ); ?></th>
+							<th><?php esc_html_e( 'Pro Edition', 'jetprayer' ); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="jp-pro-feature-col"><?php esc_html_e( 'Auto-Detect Location (GeoIP)', 'jetprayer' ); ?></td>
+							<td class="jp-pro-free-col"><?php esc_html_e( 'Manual selection only', 'jetprayer' ); ?></td>
+							<td class="jp-pro-val-col"><span class="jp-pro-check-icon">&#10004;</span> <?php esc_html_e( 'Automatic selection based on IP', 'jetprayer' ); ?></td>
+						</tr>
+						<tr>
+							<td class="jp-pro-feature-col"><?php esc_html_e( 'Colors & Styling Customization', 'jetprayer' ); ?></td>
+							<td class="jp-pro-free-col"><?php esc_html_e( 'Default dark/glass themes only', 'jetprayer' ); ?></td>
+							<td class="jp-pro-val-col"><span class="jp-pro-check-icon">&#10004;</span> <?php esc_html_e( 'Full styling & coloring control panel', 'jetprayer' ); ?></td>
+						</tr>
+						<tr>
+							<td class="jp-pro-feature-col"><?php esc_html_e( 'Custom Prayer Name Labels', 'jetprayer' ); ?></td>
+							<td class="jp-pro-free-col"><?php esc_html_e( 'Standard names (Fajr, Dhuhr...)', 'jetprayer' ); ?></td>
+							<td class="jp-pro-val-col"><span class="jp-pro-check-icon">&#10004;</span> <?php esc_html_e( 'Fully customizable labels', 'jetprayer' ); ?></td>
+						</tr>
+						<tr>
+							<td class="jp-pro-feature-col salvage-feature"><?php esc_html_e( 'Bulk Data Operations & Offsets', 'jetprayer' ); ?></td>
+							<td class="jp-pro-free-col"><span class="jp-pro-cross-icon">&#10008;</span> <?php esc_html_e( 'Manual timing adjustments only', 'jetprayer' ); ?></td>
+							<td class="jp-pro-val-col"><span class="jp-pro-check-icon">&#10004;</span> <?php esc_html_e( 'Bulk offsets, rename & translations', 'jetprayer' ); ?></td>
+						</tr>
+						<tr>
+							<td class="jp-pro-feature-col"><?php esc_html_e( 'Data Backup', 'jetprayer' ); ?></td>
+							<td class="jp-pro-val-col"><span class="jp-pro-check-icon">&#10004;</span> <?php esc_html_e( 'JSON Export (Partial/Full)', 'jetprayer' ); ?></td>
+							<td class="jp-pro-val-col"><span class="jp-pro-check-icon">&#10004;</span> <?php esc_html_e( 'JSON Export (Partial/Full)', 'jetprayer' ); ?></td>
+						</tr>
+						<tr>
+							<td class="jp-pro-feature-col"><?php esc_html_e( 'Data Restore (Import)', 'jetprayer' ); ?></td>
+							<td class="jp-pro-free-col"><span class="jp-pro-cross-icon">&#10008;</span> <?php esc_html_e( 'Manual SQL/Database operations', 'jetprayer' ); ?></td>
+							<td class="jp-pro-val-col"><span class="jp-pro-check-icon">&#10004;</span> <?php esc_html_e( 'One-click JSON file import & restore', 'jetprayer' ); ?></td>
+						</tr>
+						<tr>
+							<td class="jp-pro-feature-col"><?php esc_html_e( 'Technical Support', 'jetprayer' ); ?></td>
+							<td class="jp-pro-free-col"><?php esc_html_e( 'Community forums', 'jetprayer' ); ?></td>
+							<td class="jp-pro-val-col"><span class="jp-pro-check-icon">&#10004;</span> <?php esc_html_e( 'Direct priority email support', 'jetprayer' ); ?></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<!-- Footer CTA -->
+			<div class="jp-pro-footer-cta">
+				<h3><?php esc_html_e( 'Ready to Supercharge Your Website?', 'jetprayer' ); ?></h3>
+				<p><?php esc_html_e( 'Get lifetime access to JetPrayer Pro with all advanced features and direct premium support.', 'jetprayer' ); ?></p>
+				<a href="https://jetreader.lemonsqueezy.com/" target="_blank" class="jp-pro-footer-btn">
+					<span class="dashicons dashicons-star-filled jp-vertical-align-middle" style="color: #f59e0b;"></span>
+					<?php esc_html_e( 'Get JetPrayer Pro Now', 'jetprayer' ); ?>
+				</a>
+			</div>
+
 		</div>
 	</div>
 
