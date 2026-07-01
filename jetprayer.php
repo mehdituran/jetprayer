@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:  JetPrayer - Islamic Prayer Times
- * Plugin URI:   https://github.com/mehdituran/jetprayer
+ * Plugin URI:   https://rikny.com
  * Description:  A performance-optimized, secure, and robust WordPress plugin that displays Islamic prayer times using local caching to avoid external API calls. Features gorgeous grids, sliders, tickers, and modals.
  * Version:      1.0.3
  * Author:       Mehdi Turan
