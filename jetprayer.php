@@ -3,7 +3,7 @@
  * Plugin Name:  JetPrayer - Islamic Prayer Times
  * Plugin URI:   https://github.com/mehdituran/jetprayer
  * Description:  A performance-optimized, secure, and robust WordPress plugin that displays Islamic prayer times using local caching to avoid external API calls. Features gorgeous grids, sliders, tickers, and modals.
- * Version:      1.0.2
+ * Version:      1.0.3
  * Author:       Mehdi Turan
  * Author URI:   https://www.linkedin.com/in/mehdituran/
  * Text Domain:  jetprayer
@@ -18,8 +18,26 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+// Guard: bail before declaring any functions if Pro is already loaded in this
+// request. Both plugins use identical global function/class names (no PHP
+// namespacing); redefining them would fatal with "Cannot redeclare". Pro has
+// the JetPrayer_License class (Lite does not) — its presence means Pro's
+// file was already include()'d in this request. We also catch the edge case
+// where Pro is listed in active_plugins but its file hasn't been loaded yet.
+if ( class_exists( 'JetPrayer_License' ) || in_array( 'jetprayer-pro/jetprayer-pro.php', (array) get_option( 'active_plugins', array() ), true ) ) {
+	require_once ABSPATH . 'wp-admin/includes/plugin.php';
+	if ( is_plugin_active( 'jetprayer-pro/jetprayer-pro.php' ) ) {
+		deactivate_plugins( plugin_basename( __FILE__ ) );
+		set_transient( 'jetprayer_free_activation_blocked_pro_active', true, 30 );
+	}
+	// Pro's classes are in memory; loading Lite's same-named functions/classes
+	// now would fatal. Bail for this one request — Lite is now deactivated, so
+	// the next page load is clean. Pro's admin_notices hook will show the notice.
+	return;
+}
+
 // Define plugin constants
-define( 'JETPRAYER_VERSION', '1.0.2' );
+define( 'JETPRAYER_VERSION', '1.0.3' );
 define( 'JETPRAYER_PATH', plugin_dir_path( __FILE__ ) );
 define( 'JETPRAYER_URL', plugin_dir_url( __FILE__ ) );
 define( 'JETPRAYER_BASENAME', plugin_basename( __FILE__ ) );

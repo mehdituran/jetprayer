@@ -15,12 +15,17 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 global $wpdb;
 
-// 1. Drop the custom prayer times table
-$jetprayer_table_name = $wpdb->prefix . 'jetprayer_times';
-// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
-$wpdb->query( $wpdb->prepare( 'DROP TABLE IF EXISTS %i', $jetprayer_table_name ) );
+// Both plugins share the same tables and option names. If Pro is currently
+// active, dropping the table or clearing those options here would silently
+// destroy live data that Pro is still using. Only wipe shared state when Pro
+// is not active; otherwise leave the DB alone — the folder is removed by
+// WordPress regardless, which is all that is needed to hide it from the list.
+$jetprayer_pro_active = in_array(
+	'jetprayer-pro/jetprayer-pro.php',
+	(array) get_option( 'active_plugins', array() ),
+	true
+);
 
-// 2. Delete all saved plugin options from wp_options
 $jetprayer_options = array(
 	'jetprayer_type',
 	'jetprayer_city',
@@ -39,9 +44,16 @@ $jetprayer_options = array(
 	'jetprayer_display_modal',
 );
 
-foreach ( $jetprayer_options as $jetprayer_option ) {
-	delete_option( $jetprayer_option );
+if ( ! $jetprayer_pro_active ) {
+	// Pro is not active — safe to drop shared tables and options.
+	$jetprayer_table_name = $wpdb->prefix . 'jetprayer_times';
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
+	$wpdb->query( $wpdb->prepare( 'DROP TABLE IF EXISTS %i', $jetprayer_table_name ) );
+
+	foreach ( $jetprayer_options as $jetprayer_option ) {
+		delete_option( $jetprayer_option );
+	}
 }
 
-// 3. Delete any active transients
+// Always clean up our own transient regardless.
 delete_transient( 'jetprayer_sync_lock' );

@@ -3,7 +3,7 @@ Contributors: mehdituran
 Tags: prayer times, islamic, namaz, adhan, ezan
 Requires at least: 6.2
 Tested up to: 7.0
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -98,6 +98,11 @@ The plugin will download and cache all timings sequentially with real-time progr
 9. Backup page – Allows downloading a complete or partial JSON backup of the plugin settings, customization values, and timings.
 
 == Changelog ==
+
+= 1.0.3 =
+*   Fixed critical compatibility bug: activating JetPrayer (free) while JetPrayer Pro is active no longer causes a PHP fatal error — the free version now auto-deactivates itself and shows a clear admin notice via Pro.
+*   Fixed data-loss bug: uninstalling JetPrayer (free) while JetPrayer Pro is active no longer drops shared database tables or options; DB cleanup is skipped when the other version is still active.
+*   Same data-safety guard added to JetPrayer Pro's uninstall — shared tables and options are preserved when the free version is active.
 
 = 1.0.2 =
 *   Fixed Display settings bug where font-weight values (like 600, 700) were clamped to 100 on sanitization.
